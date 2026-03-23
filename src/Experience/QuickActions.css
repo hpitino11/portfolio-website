@@ -1,0 +1,82 @@
+.quick-actions {
+  position: fixed;
+    left: 32px;
+  bottom: 32px;
+  z-index: 3000;
+
+  display: grid;
+  grid-template-columns: repeat(2, 68px);
+  grid-template-rows: repeat(2, 68px);
+  gap: 10px;
+
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.quick-actions.quick-actions-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.quick-action-btn {
+  width: 68px;
+  height: 68px;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.72);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.quick-action-btn:hover,
+.quick-action-btn.active {
+  background: white;
+  color: black;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.18);
+}
+.quick-action-btn {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: quickActionIn 0.6s ease forwards;
+}
+
+.quick-actions.quick-actions-visible .quick-action-btn:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.quick-actions.quick-actions-visible .quick-action-btn:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.quick-actions.quick-actions-visible .quick-action-btn:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.quick-actions.quick-actions-visible .quick-action-btn:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+@keyframes quickActionIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

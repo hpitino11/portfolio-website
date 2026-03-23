@@ -1,0 +1,28 @@
+import * as THREE from 'three'
+
+export function convertMaterialsToBasic(materials) {
+  const basicMaterials = {}
+
+  Object.entries(materials).forEach(([name, material]) => {
+    basicMaterials[name] = new THREE.MeshBasicMaterial({
+      map: material.map || null,
+      alphaMap: material.alphaMap || null,
+      transparent: material.transparent ?? false,
+      opacity: material.opacity ?? 1,
+      side: material.side ?? THREE.FrontSide,
+      visible: material.visible ?? true,
+      color: material.color ? material.color.clone() : new THREE.Color(1, 1, 1),
+    })
+
+    if (basicMaterials[name].map) {
+      basicMaterials[name].map.colorSpace = THREE.SRGBColorSpace
+      basicMaterials[name].map.needsUpdate = true
+    }
+
+    if (basicMaterials[name].alphaMap) {
+      basicMaterials[name].alphaMap.needsUpdate = true
+    }
+  })
+
+  return basicMaterials
+}

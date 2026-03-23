@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  overflow: hidden;
+  pointer-events: none;
+  background: transparent; /* important */
+}
+
+/* curtains */
+.curtain {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 12, 1),
+    rgba(16, 16, 22, 1)
+  );
+  transition: transform 1.8s cubic-bezier(0.77, 0, 0.18, 1);
+  will-change: transform;
+}
+
+/* overlap slightly so no seam shows */
+.curtain-left {
+  left: 0;
+  width: calc(50% + 3px);
+}
+
+.curtain-right {
+  right: 0;
+  width: calc(50% + 3px);
+}
+
+.loader-overlay.opening .curtain-left {
+  transform: translateX(-100%);
+}
+
+.loader-overlay.opening .curtain-right {
+  transform: translateX(100%);
+}
+
+/* spinner */
+.loader-spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.loader-spinner.hide {
+  opacity: 0;
+}
+
+.welcome-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: white;
+
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.12),
+    0 0 36px rgba(255, 255, 255, 0.08);
+}
+
+.welcome-text.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.welcome-text.hide {
+  opacity: 0;
+  transform: scale(0.97);
+}
