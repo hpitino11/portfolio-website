@@ -175,6 +175,8 @@
 }
 /* detail view */
 .projects-back-btn {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.34);
   color: white;
@@ -184,6 +186,7 @@
   cursor: pointer;
   margin-bottom: 16px;
   font-size: 0.92rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all 0.25s ease;
 }
 
@@ -218,8 +221,6 @@
 }
 
 .project-detail-copy p {
-padding-left: 5%;
-padding-top: 2%;
   color: rgba(255, 255, 255, 0.86);
   line-height: 1.75;
   margin: 0;
@@ -338,6 +339,21 @@ padding-top: 2%;
 }
 .project-detail-copy p {
   margin-bottom: 18px;
-  line-height: 1.7;
+  line-height: 1.75;
   max-width: 65ch;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card-image {
+    height: 200px;
+  }
+
+  .project-detail-image {
+    height: 200px;
+  }
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
 import './ProjectsPanelContent.css'
 
 const projects = [
@@ -120,7 +121,8 @@ export default function ProjectsPanelContent() {
           className="projects-back-btn"
           onClick={() => setSelectedProject(null)}
         >
-          ← Back to Projects
+          <ArrowLeft size={15} strokeWidth={1.8} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+          Back to Projects
         </button>
 
         <div className="project-detail-image-wrap">
@@ -138,7 +140,7 @@ export default function ProjectsPanelContent() {
                 onClick={showPrevImage}
                 aria-label="Previous image"
               >
-                ←
+                <ChevronLeft size={14} strokeWidth={2} />
               </button>
 
               <button
@@ -147,7 +149,7 @@ export default function ProjectsPanelContent() {
                 onClick={showNextImage}
                 aria-label="Next image"
               >
-                →
+                <ChevronRight size={14} strokeWidth={2} />
               </button>
 
               <div className="project-image-dots">

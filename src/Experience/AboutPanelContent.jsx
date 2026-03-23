@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './AboutPanelContent.css'
 
 const pages = [
@@ -243,7 +244,7 @@ export default function AboutPanelContent() {
       type="button"
       aria-label="Previous"
     >
-      ←
+      <ChevronLeft size={18} strokeWidth={1.8} />
     </button>
 
     <div className="about-nav-dots">
@@ -265,7 +266,7 @@ export default function AboutPanelContent() {
       type="button"
       aria-label="Next"
     >
-      →
+      <ChevronRight size={18} strokeWidth={1.8} />
     </button>
   </div>
 )}

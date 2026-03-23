@@ -10,7 +10,7 @@ export default function QuickActions({ onSelect, activePanel, visible }) {
   ]
 
   return (
-    <div className={`quick-actions ${visible ? 'quick-actions-visible' : ''}`}>
+    <div className={`quick-actions ${visible ? 'quick-actions-visible' : ''} ${activePanel ? 'has-panel' : ''}`}>
       {items.map((item) => {
         const Icon = item.icon
         const isActive = activePanel === item.key

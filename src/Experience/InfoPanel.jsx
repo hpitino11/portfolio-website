@@ -1,11 +1,12 @@
 import './InfoPanel.css'
+import { X } from 'lucide-react'
 import AboutPanelContent from './AboutPanelContent'
 import ProjectsPanelContent from './ProjectsPanelContent'
 import ContactPanelContent from './ContactPanelContent'
 
 const panelContent = {
   about: {
-    title: 'About Me',
+    title: 'About',
     body: ``
   },
   projects: {
@@ -13,7 +14,7 @@ const panelContent = {
     body: ``
   },
   contact: {
-    title: 'Contact Me',
+    title: 'Contact',
     body: `You can reach me by email, LinkedIn, or GitHub.`
   },
   resume: {
@@ -41,7 +42,7 @@ export default function InfoPanel({ activePanel, onClose }) {
               aria-label="Close panel"
               type="button"
             >
-              ×
+              <X size={16} strokeWidth={2} />
             </button>
 
             <div className="info-panel-inner">

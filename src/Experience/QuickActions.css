@@ -80,3 +80,31 @@
     transform: translateY(0);
   }
 }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .quick-actions {
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(18px);
+    grid-template-columns: repeat(4, 56px);
+    grid-template-rows: 56px;
+    gap: 8px;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .quick-actions.quick-actions-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .quick-action-btn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .quick-actions.has-panel {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+}

@@ -29,7 +29,7 @@
 .contact-card-list {
   display: grid;
   gap: 14px;
-  margin-top: 10%;
+  margin-top: 0;
 }
 
 .contact-card {
