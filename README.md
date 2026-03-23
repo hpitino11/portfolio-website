@@ -49,7 +49,7 @@ React is used to manage UI elements, overlays, and interactions, creating a clea
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/portfolio-website.git
+git clone https://github.com/hpitino11/portfolio-website.git
 
 # Install dependencies
 npm install
