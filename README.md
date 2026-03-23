@@ -1,16 +1,58 @@
-# React + Vite
+# 🌌 3D Portfolio Experience
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive 3D portfolio built to showcase my work through an immersive, real-time environment rather than a traditional website.
 
-Currently, two official plugins are available:
+🔗 Live Site: https://hannapitino.com/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project is a custom-designed 3D web experience where users can explore a virtual environment and interact with different sections of my portfolio. Instead of scrolling through a static page, visitors navigate through a fully rendered scene that highlights my projects, skills, and design approach.
 
-## Expanding the ESLint configuration
+The goal was to combine **frontend engineering + 3D graphics + UX design** into a single, memorable experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧠 Features
+
+- 🎮 Interactive 3D environment rendered in the browser
+- ⚡ Real-time performance optimization using baked textures
+- 🧩 Modular React component architecture for UI overlays
+- 🎨 Custom materials and lighting baked in Blender
+- 📱 Responsive UI layered over WebGL canvas
+- 🖱️ Smooth camera movement and scene navigation
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Three.js
+- **3D & Assets:** Blender (modeling, UVs, texture baking)
+- **Styling:** CSS / modern UI design principles
+- **Build Tool:** Vite
+
+---
+
+## ⚙️ How It Works
+
+The 3D scene is rendered using Three.js and optimized for web performance by baking complex lighting and materials into texture maps inside Blender. This allows the scene to maintain visual quality while running smoothly in real time.
+
+React is used to manage UI elements, overlays, and interactions, creating a clean separation between the 3D world and the application logic.
+
+---
+
+## ❤️ Special Thanks
+- Pandawoan on YouTube for the inspiration 
+
+## 🚀 Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/portfolio-website.git
+
+# Install dependencies
+npm install
+
+# Run locally
+npm run dev
