@@ -20,7 +20,6 @@ The goal was to combine **frontend engineering + 3D graphics + UX design** into 
 - ⚡ Real-time performance optimization using baked textures
 - 🧩 Modular React component architecture for UI overlays
 - 🎨 Custom materials and lighting baked in Blender
-- 📱 Responsive UI layered over WebGL canvas
 - 🖱️ Smooth camera movement and scene navigation
 
 ---
@@ -40,10 +39,12 @@ The 3D scene is rendered using Three.js and optimized for web performance by bak
 
 React is used to manage UI elements, overlays, and interactions, creating a clean separation between the 3D world and the application logic.
 
+Using OrbitControls, the user can click and hold their mouse to move the camera around the scene.
+
 ---
 
 ## ❤️ Special Thanks
-- Pandawoan on YouTube for the inspiration 
+- Pandawoan on YouTube for the inspiration and videos
 
 ## 🚀 Getting Started
 
