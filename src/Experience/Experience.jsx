@@ -5,6 +5,7 @@ import Navbar from './Navbar'
 import LoaderOverlay from './LoaderOverlay'
 import QuickActions from './QuickActions'
 import InfoPanel from './InfoPanel'
+import AmbientPlayer from './AmbientPlayer'
 import './Experience.css'
 
 const Experience = () => {
@@ -47,6 +48,7 @@ const Experience = () => {
     />
   </>
 )}
+      <AmbientPlayer visible={introDone} panelOpen={!!activePanel} />
     </div>
   )
 }

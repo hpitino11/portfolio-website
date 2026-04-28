@@ -4,6 +4,26 @@ import './ProjectsPanelContent.css'
 
 const projects = [
   {
+    id: 'apex',
+    title: 'Apex Mitigation',
+    images: [
+      '/img/projects/apex.webp',
+      '/img/projects/apex-2.webp',
+      '/img/projects/apex-3.webp',
+      '/img/projects/apex-4.webp'
+    ],
+    tooltip:
+      'Production website for a water and fire damage restoration company, built with Laravel and deployed end-to-end.',
+    tools: ['Laravel', 'PHP 8.4', 'Docker', 'HTTPS/SSL', 'HTML/CSS'],
+    description: [
+      'A freelance contract project building a production website for Apex Mitigation LLC, a water and fire damage restoration company. Delivered a fully responsive, multi-page site using Laravel (PHP 8.4) with a working lead generation contact form routed directly to the client.',
+      'Handled the complete end-to-end deployment pipeline, including containerization with Docker and HTTPS setup. This project covered everything from initial development to live production deployment, ensuring a reliable, secure, and professional web presence for the client.'
+    ],
+    websiteUrl: 'https://apexmitigation.com',
+    websiteLabel: 'Link to Website',
+    comingSoon: false
+  },
+  {
     id: 'insurance',
     title: 'Insurance Agency Website',
     images: [
@@ -13,12 +33,13 @@ const projects = [
     ],
     tooltip:
       'Custom client website with responsive UI, polished branding, and a modern professional web presence.',
-    tools: ['React', 'JavaScript', 'HTML/CSS', 'Bootstrap', 'Node.js',],
+    tools: ['React', 'JavaScript', 'HTML/CSS', 'Bootstrap', 'Node.js'],
     description: [
       'A professional website built for a real insurance agency client. This project focused on translating business needs into a polished and modern web presence, with responsive layouts, custom branding, and production-minded deployment.',
       'I handled the entire development lifecycle from initial design concepts to final deployment. This included designing the UI, building the front-end, and configuring hosting, DNS, and SSL. I also implemented a contact form using a backend API to securely handle user submissions, ensuring reliable client communication and proper data flow between the front-end and server.'
     ],
     websiteUrl: 'https://coastalviewins.com/',
+    websiteLabel: 'Visit Website Here',
     comingSoon: false
   },
   {
@@ -68,18 +89,9 @@ const projects = [
     comingSoon: false
   },
   {
-    id: 'apex',
-    title: 'Apex Mitigation',
-    images: ['/img/projects/apex.webp'],
-    tooltip: 'COMING SOON',
-    tools: ['Angular', 'Vite', 'PHP'],
-    description: 'COMING SOON',
-    comingSoon: true
-  },
-  {
-    id: 'contact',
-    title: 'Contact Manager',
-    images: ['/img/projects/contact.webp'],
+    id: 'mailer',
+    title: 'Mailer',
+    images: ['/img/projects/mail.webp'],
     tooltip: 'COMING SOON',
     tools: [],
     description: 'COMING SOON',
@@ -195,7 +207,7 @@ export default function ProjectsPanelContent() {
               rel="noopener noreferrer"
               className="project-visit-btn"
             >
-              Visit Website Here
+              {selectedProject.websiteLabel ?? 'Visit Website Here'}
             </a>
           )}
         </div>

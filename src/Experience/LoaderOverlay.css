@@ -85,3 +85,34 @@
   opacity: 0;
   transform: scale(0.97);
 }
+
+.loader-overlay.enter {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.enter-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.enter-text.show {
+  opacity: 1;
+  animation: enter-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes enter-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.75; }
+}

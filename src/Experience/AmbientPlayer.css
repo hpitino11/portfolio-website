@@ -1,0 +1,72 @@
+.ambient-player-iframe {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  top: -9999px;
+}
+
+.ambient-mute-btn {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 3000;
+
+  width: 68px;
+  height: 68px;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.72);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.5s ease;
+}
+
+.ambient-mute-btn.ambient-mute-btn-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ambient-mute-btn.ambient-mute-btn-panel-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.5s ease !important;
+}
+
+
+.ambient-mute-btn:hover {
+  background: white;
+  color: black;
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.18);
+}
+
+/* ── Mobile ── */
+/* Sits in the 5th slot of the shared bottom row (see QuickActions.css) */
+@media (max-width: 640px) {
+  .ambient-mute-btn {
+    right: auto;
+    left: calc(50% + 100px); /* 156px - 56px = 100px: start of 5th slot */
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
+  }
+}

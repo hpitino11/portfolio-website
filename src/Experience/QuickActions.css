@@ -82,11 +82,13 @@
 }
 
 /* ── Mobile ── */
+/* 5-button row: 4 quick-action btns + 1 music btn = 5×56 + 4×8 = 312px wide  */
+/* QuickActions occupies the left 4 slots; offset from center = 312/2 = 156px  */
 @media (max-width: 640px) {
   .quick-actions {
-    left: 50%;
+    left: calc(50% - 156px);
     bottom: 24px;
-    transform: translateX(-50%) translateY(18px);
+    transform: translateY(18px);
     grid-template-columns: repeat(4, 56px);
     grid-template-rows: 56px;
     gap: 8px;
@@ -94,7 +96,7 @@
   }
 
   .quick-actions.quick-actions-visible {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 
   .quick-action-btn {
