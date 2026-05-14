@@ -1,12 +1,12 @@
-# 🌌 3D Portfolio Experience
+#  3D Portfolio Experience
 
 An interactive 3D portfolio built to showcase my work through an immersive, real-time environment rather than a traditional website.
 
-🔗 Live Site: https://hannapitino.com/
+ Live Site: https://hannapitino.com/
 
 ---
 
-## ✨ Overview
+##  Overview
 
 This project is a custom-designed 3D web experience where users can explore a virtual environment and interact with different sections of my portfolio. Instead of scrolling through a static page, visitors navigate through a fully rendered scene that highlights my projects, skills, and design approach.
 
@@ -14,17 +14,17 @@ The goal was to combine **frontend engineering + 3D graphics + UX design** into 
 
 ---
 
-## 🧠 Features
+##  Features
 
-- 🎮 Interactive 3D environment rendered in the browser
-- ⚡ Real-time performance optimization using baked textures
-- 🧩 Modular React component architecture for UI overlays
-- 🎨 Custom materials and lighting baked in Blender
-- 🖱️ Smooth camera movement and scene navigation
+-  Interactive 3D environment rendered in the browser
+-  Real-time performance optimization using baked textures
+-  Modular React component architecture for UI overlays
+-  Custom materials and lighting baked in Blender
+-  Smooth camera movement and scene navigation
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend:** React, Three.js
 - **3D & Assets:** Blender (modeling, UVs, texture baking)
@@ -33,7 +33,7 @@ The goal was to combine **frontend engineering + 3D graphics + UX design** into 
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
 The 3D scene is rendered using Three.js and optimized for web performance by baking complex lighting and materials into texture maps inside Blender. This allows the scene to maintain visual quality while running smoothly in real time.
 
@@ -46,7 +46,7 @@ Using OrbitControls, the user can click and hold their mouse to move the camera 
 ## ❤️ Special Thanks
 - Pandawoan on YouTube for the inspiration and videos
 
-## 🚀 Getting Started
+##  Getting Started
 
 ```bash
 # Clone the repo
