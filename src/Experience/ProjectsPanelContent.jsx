@@ -21,6 +21,7 @@ const projects = [
     ],
     websiteUrl: 'https://apexmitigation.com',
     websiteLabel: 'Visit Live Site',
+    category: 'Contract',
     comingSoon: false
   },
   {
@@ -40,6 +41,7 @@ const projects = [
     ],
     websiteUrl: 'https://coastalviewins.com/',
     websiteLabel: 'Visit Live Site',
+    category: 'Contract',
     comingSoon: false
   },
   {
@@ -57,6 +59,7 @@ const projects = [
       'An immersive portfolio experience built with React Three Fiber and Blender. It combines 3D scene presentation, modern UI overlays, camera composition, and interactive panels to create a more memorable developer portfolio.',
       'To ensure a seamless and intentional user experience, I created design prototypes in both Blender and Figma before implementation. This allowed me to experiment with layout, camera angles, lighting, and interaction flow, translating those designs directly into the final 3D web experience with a strong focus on usability and visual polish.'
     ],
+    category: 'Personal',
     comingSoon: false
   },
   {
@@ -70,6 +73,7 @@ const projects = [
       'A professor review platform designed to help students browse and evaluate instructors. This project emphasized full-stack structure, front-end usability, and organizing data-driven interfaces in a clean and accessible way.',
       'I implemented RESTful APIs to retrieve and structure data scraped from Rate My Professors, enabling it to be dynamically consumed by the front-end. This data was then visualized using Chart.js, allowing users to easily interpret trends such as ratings, difficulty, and overall sentiment through interactive and responsive charts.'
     ],
+    category: 'Personal',
     comingSoon: false
   },
   {
@@ -86,6 +90,7 @@ const projects = [
       'A software engineering internship project where I worked on modular inventory UI systems in Unreal Engine 5. The work involved real-time gameplay data integration, structured UI logic, and debugging system behavior in a team-based environment.',
       'I identified inefficiencies in how inventory data was being transmitted and helped redesign the system to reduce redundant data transfer, improving performance and scalability. This involved collaborating with team members and refining how backend and UI systems communicated.'
     ],
+    category: 'Internship',
     comingSoon: false
   },
   {
@@ -104,6 +109,7 @@ const projects = [
     ],
     websiteUrl: 'https://carecalendar.dev',
     websiteLabel: 'Visit Live Site',
+    category: 'Personal',
     comingSoon: false
   },
   {
@@ -233,10 +239,13 @@ export default function ProjectsPanelContent() {
     )
   }
 
+  const liveCount = projects.filter(p => !p.comingSoon).length
+
   return (
     <div className="projects-gallery-view projects-fade-in">
-      <div className="projects-intro">
-        <p>Click a project to learn more.</p>
+      <div className="projects-header-row">
+        <span className="projects-eyebrow">Selected Work</span>
+        <span className="projects-count-badge">{liveCount}</span>
       </div>
 
       <div className="projects-grid">
@@ -255,6 +264,10 @@ export default function ProjectsPanelContent() {
               className="project-card-image"
             />
 
+            {!project.comingSoon && project.category && (
+              <div className="project-card-category">{project.category}</div>
+            )}
+
             <div className="project-card-overlay">
               <h3>{project.title}</h3>
             </div>
@@ -262,6 +275,13 @@ export default function ProjectsPanelContent() {
             {!project.comingSoon && (
               <div className="project-card-hover-panel">
                 <p>{project.tooltip}</p>
+                {project.tools.length > 0 && (
+                  <div className="project-card-hover-chips">
+                    {project.tools.slice(0, 3).map((tool) => (
+                      <span key={tool} className="project-card-hover-chip">{tool}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

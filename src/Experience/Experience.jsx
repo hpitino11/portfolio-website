@@ -20,13 +20,14 @@ const Experience = () => {
 
       <Canvas
         camera={{
-    position: [4.231, 3.278, 3.335],
-    fov: 60,
-    near: 0.01,
-    far: 2000
-  }}
+          position: [4.231, 3.278, 3.335],
+          fov: 60,
+          near: 0.1,
+          far: 100
+        }}
         flat
-        gl={{ antialias: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, powerPreference: 'high-performance' }}
       >
         <Suspense fallback={null}>
 <Scene

@@ -111,9 +111,9 @@ export default function AboutPanelContent() {
             usedIn: 'Used to structure responsive and semantic front-end interfaces.'
           },
           {
-            src: '/icons/css.svg',
-            label: 'CSS3',
-            usedIn: 'Used for styling, layout, animations, and UI polish across my web projects.'
+            src: '/icons/sql.svg',
+            label: 'SQL',
+            usedIn: 'Used for querying and managing relational databases, including raw PostgreSQL in production projects.'
           },
           {
             src: '/icons/node.svg',
