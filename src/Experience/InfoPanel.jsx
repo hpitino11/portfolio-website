@@ -3,6 +3,7 @@ import { X } from 'lucide-react'
 import AboutPanelContent from './AboutPanelContent'
 import ProjectsPanelContent from './ProjectsPanelContent'
 import ContactPanelContent from './ContactPanelContent'
+import ResumePanelContent from './ResumePanelContent'
 
 const panelContent = {
   about: {
@@ -58,19 +59,7 @@ export default function InfoPanel({ activePanel, onClose }) {
 ) : activePanel === 'contact' ? (
   <ContactPanelContent />
 ) : activePanel === 'resume' ? (
-  <>
-    <div className="resume-preview-card">
-      <p className="resume-preview-text">
-        View my resume here, open it in a new tab, or download the PDF below.
-      </p>
-    </div>
-
-    <iframe
-      src="/resume.pdf"
-      title="Resume"
-      className="resume-frame"
-    />
-  </>
+  <ResumePanelContent />
 ) : (
   <p>{content.body}</p>
 )}

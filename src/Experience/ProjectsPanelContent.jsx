@@ -20,7 +20,7 @@ const projects = [
       'Handled the complete end-to-end deployment pipeline, including containerization with Docker and HTTPS setup. This project covered everything from initial development to live production deployment, ensuring a reliable, secure, and professional web presence for the client.'
     ],
     websiteUrl: 'https://apexmitigation.com',
-    websiteLabel: 'Link to Website',
+    websiteLabel: 'Visit Live Site',
     comingSoon: false
   },
   {
@@ -39,7 +39,7 @@ const projects = [
       'I handled the entire development lifecycle from initial design concepts to final deployment. This included designing the UI, building the front-end, and configuring hosting, DNS, and SSL. I also implemented a contact form using a backend API to securely handle user submissions, ensuring reliable client communication and proper data flow between the front-end and server.'
     ],
     websiteUrl: 'https://coastalviewins.com/',
-    websiteLabel: 'Visit Website Here',
+    websiteLabel: 'Visit Live Site',
     comingSoon: false
   },
   {
@@ -86,6 +86,24 @@ const projects = [
       'A software engineering internship project where I worked on modular inventory UI systems in Unreal Engine 5. The work involved real-time gameplay data integration, structured UI logic, and debugging system behavior in a team-based environment.',
       'I identified inefficiencies in how inventory data was being transmitted and helped redesign the system to reduce redundant data transfer, improving performance and scalability. This involved collaborating with team members and refining how backend and UI systems communicated.'
     ],
+    comingSoon: false
+  },
+  {
+    id: 'carecalendar',
+    title: 'Care Calendar',
+    images: [
+      '/img/projects/carecalendar.webp',
+      '/img/projects/carecalendar2.webp'
+    ],
+    tooltip:
+      'Admin dashboard for managing home care visits, caregivers, and clients. Built as the technical portion of an interview.',
+    tools: ['React', 'FullCalendar', 'Node.js', 'Express', 'PostgreSQL', 'Railway'],
+    description: [
+      'An admin dashboard built as the technical portion of a take-home interview. It gives administrators a centralized view of a caregiving operation — who is working, who they are caring for, and when — with a live calendar, dashboard stats, and full CRUD for visits, caregivers, and clients.',
+      'The dashboard features an interactive FullCalendar with month, week, and day views, week-over-week trend badges, multi-day visit spanning, hover tooltips, and smart grouping for overlapping events. The backend is built with Node.js and Express backed by raw PostgreSQL via pg, with the full stack deployed to Railway.'
+    ],
+    websiteUrl: 'https://carecalendar.dev',
+    websiteLabel: 'Visit Live Site',
     comingSoon: false
   },
   {
@@ -207,7 +225,7 @@ export default function ProjectsPanelContent() {
               rel="noopener noreferrer"
               className="project-visit-btn"
             >
-              {selectedProject.websiteLabel ?? 'Visit Website Here'}
+              {selectedProject.websiteLabel ?? 'Visit Live Site'}
             </a>
           )}
         </div>

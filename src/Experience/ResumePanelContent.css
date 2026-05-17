@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+.resume-doc {
+  padding: 4px 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Header ── */
+.resume-doc-header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.resume-name {
+  margin: 0 0 10px 0;
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.01em;
+}
+
+.resume-contact {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-contact a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.resume-contact a:hover {
+  color: white;
+}
+
+.resume-contact-dot {
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Sections ── */
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resume-section-title {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.42);
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Entries ── */
+.resume-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.resume-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.resume-entry-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: white;
+}
+
+.resume-entry-date {
+  font-size: 0.815rem;
+  color: rgba(255, 255, 255, 0.44);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.resume-entry-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.resume-entry-tech {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.44);
+  font-style: italic;
+}
+
+/* ── Bullets ── */
+.resume-bullets {
+  margin: 7px 0 0 0;
+  padding-left: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.resume-bullets li {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.68;
+}
+
+/* ── Skills ── */
+.resume-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.resume-skill-row {
+  display: flex;
+  gap: 14px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.resume-skill-label {
+  min-width: 155px;
+  flex-shrink: 0;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.resume-skill-value {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .resume-name {
+    font-size: 1.5rem;
+  }
+
+  .resume-entry-header {
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .resume-entry-sub {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .resume-skill-row {
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .resume-skill-label {
+    min-width: unset;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
