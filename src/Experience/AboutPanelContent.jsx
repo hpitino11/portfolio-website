@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Code2, Layout, Users, Layers, Gamepad2, Sparkles, TrendingUp } from 'lucide-react'
 import './AboutPanelContent.css'
 
 const pages = [
@@ -47,7 +47,7 @@ export default function AboutPanelContent() {
           <div className={`about-intro-card ${introLeaving ? 'leave' : 'show'}`}>
             <span className="about-intro-eyebrow">Hey there</span>
             <h3>I'm Hanna Pitino</h3>
-            <p>Nice to meet you.</p>
+<p>Nice to meet you.</p>
           </div>
         )}
 
@@ -60,19 +60,34 @@ export default function AboutPanelContent() {
             </div>
 
             <div className="about-copy-card">
-  <h3>Who I Am</h3>
-  <p>
-    I’m Hanna Pitino, a software developer with a strong interest in full-stack web
-    development, interactive UI, and building polished digital experiences that combine
-    technical problem solving with thoughtful design.
-  </p>
-  <p>
-    My background includes front-end development, API integration, and 3D web presentation,
-    and I enjoy creating projects that feel both visually engaging and technically well built.
-    I’m especially drawn to work that lets me blend clean UI, modern web technologies, and
-    user-focused interaction.
-  </p>
-</div>
+              <h3>Who I Am</h3>
+              <p>
+                I’m Hanna Pitino, a software developer with a strong interest in full-stack web
+                development, interactive UI, and building polished digital experiences that combine
+                technical problem solving with thoughtful design.
+              </p>
+              <p>
+                My background includes front-end development, API integration, and 3D web presentation,
+                and I enjoy creating projects that feel both visually engaging and technically well built.
+                I’m especially drawn to work that lets me blend clean UI, modern web technologies, and
+                user-focused interaction.
+              </p>
+
+              <div className="about-stats-row">
+                <div className="about-stat">
+                  <span className="about-stat-num">2</span>
+                  <span className="about-stat-label">Contracts</span>
+                </div>
+                <div className="about-stat">
+                  <span className="about-stat-num">4</span>
+                  <span className="about-stat-label">Sites Shipped</span>
+                </div>
+                <div className="about-stat">
+                  <span className="about-stat-num">B.S.</span>
+                  <span className="about-stat-label">Computer Science</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 {pageIndex === 2 && (
@@ -151,33 +166,27 @@ export default function AboutPanelContent() {
         ))}
       </div>
 
-      <div className="skills-detail-list">
-        <div>
-          <h4>Full-Stack & API Work</h4>
-          <p>
-            Experience building and integrating RESTful APIs, handling client-server
-            communication, structuring data flow, and connecting front-end interfaces
-            to backend services in real-world web projects.
-          </p>
+      <div className="about-strength-cards">
+        <div className="about-strength-card">
+          <div className="about-strength-icon"><Code2 size={15} strokeWidth={1.8} /></div>
+          <div>
+            <h4>Full-Stack & API Work</h4>
+            <p>Building and integrating RESTful APIs, structuring data flow, and connecting front-end interfaces to backend services in real-world web projects.</p>
+          </div>
         </div>
-
-        <div>
-          <h4>Front-End Development</h4>
-          <p>
-            Strong focus on React-based UI development, responsive layouts, clean
-            component structure, modern styling, and creating polished user experiences
-            that feel intuitive and refined.
-          </p>
+        <div className="about-strength-card">
+          <div className="about-strength-icon"><Layout size={15} strokeWidth={1.8} /></div>
+          <div>
+            <h4>Front-End Development</h4>
+            <p>React-based UI development, responsive layouts, clean component structure, and creating polished experiences that feel intuitive and refined.</p>
+          </div>
         </div>
-
-
-        <div>
-          <h4>Collaboration & Workflow</h4>
-          <p>
-            Comfortable working with Git, Jira, Docker, and cloud/deployment-related
-            tools while iterating on features, debugging issues, and improving usability
-            and performance.
-          </p>
+        <div className="about-strength-card">
+          <div className="about-strength-icon"><Users size={15} strokeWidth={1.8} /></div>
+          <div>
+            <h4>Collaboration & Workflow</h4>
+            <p>Comfortable with Git, Jira, Docker, and deployment tooling while iterating on features, debugging, and improving usability and performance.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -210,21 +219,22 @@ export default function AboutPanelContent() {
       {/* CARDS */}
       <div className="personal-interests-grid">
         <div className="personal-interest-card">
+          <div className="personal-interest-icon"><Layers size={14} strokeWidth={1.8} /></div>
           <h4>Creative Projects</h4>
           <p>3D environments, visual concepts, UI polish, and iterative design work.</p>
         </div>
-
         <div className="personal-interest-card">
+          <div className="personal-interest-icon"><Gamepad2 size={14} strokeWidth={1.8} /></div>
           <h4>Interactive Media</h4>
           <p>Games, immersive experiences, and design-driven projects.</p>
         </div>
-
         <div className="personal-interest-card">
+          <div className="personal-interest-icon"><Sparkles size={14} strokeWidth={1.8} /></div>
           <h4>Aesthetic Design</h4>
           <p>Modern spaces, cohesive visuals, and clean presentation.</p>
         </div>
-
         <div className="personal-interest-card">
+          <div className="personal-interest-icon"><TrendingUp size={14} strokeWidth={1.8} /></div>
           <h4>Iteration & Growth</h4>
           <p>Refining work over time and continuously improving ideas.</p>
         </div>

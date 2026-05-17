@@ -42,9 +42,7 @@ export default function Model(props) {
 
   useEffect(() => {
     document.body.style.cursor = hoveredCard ? 'pointer' : 'default'
-    return () => {
-      document.body.style.cursor = 'default'
-    }
+    return () => { document.body.style.cursor = 'default' }
   }, [hoveredCard])
 
   const iconAnimDone = useRef(false)
@@ -174,8 +172,6 @@ export default function Model(props) {
 
       mats.forEach((mat) => setMaterialOpacity(mat, fadeT))
     }
-
-    
 
     animateIntroGroup(githubGroupRef, 0.00, githubBasePos, [
       githubPanelMaterial,
