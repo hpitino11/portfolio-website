@@ -12,6 +12,8 @@ export default function ResumePanelContent() {
           <a href="mailto:hapitino@gmail.com">hapitino@gmail.com</a>
           <span className="resume-contact-dot">●</span>
           <a href="https://hannapitino.com" target="_blank" rel="noopener noreferrer">hannapitino.com</a>
+          <span className="resume-contact-dot">●</span>
+          <a href="https://linkedin.com/in/hanna-pitino" target="_blank" rel="noopener noreferrer">linkedin.com/in/hanna-pitino</a>
         </p>
       </div>
 
@@ -34,7 +36,7 @@ export default function ResumePanelContent() {
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Full-Stack Developer (Contract)</span>
+            <span className="resume-entry-title">Full-Stack Developer, Contract</span>
             <span className="resume-entry-date">Feb 2026 – Present</span>
           </div>
           <div className="resume-entry-sub">
@@ -42,15 +44,15 @@ export default function ResumePanelContent() {
             <span>Port Saint Lucie, FL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Built and deployed a full-stack marketing website for a water damage restoration company using Laravel (PHP 8.4) and Blade templating, covering multiple pages including service pages, project gallery, pricing, FAQ, and contact.</li>
-            <li>Integrated a contact form with transactional email delivery via Resend, routing client lead inquiries directly from the site.</li>
-            <li>Implemented a fully responsive mobile layout with custom CSS and optimized site performance through video compression and reduced template overhead.</li>
+            <li>Shipped a multipage Laravel and Blade marketing site for a water and fire damage restoration company, owning the full stack from PHP 8.4 backend to a custom responsive UI with no external framework dependencies.</li>
+            <li>Built a Resend backed contact pipeline with server side validation that routes inbound client leads to ownership within seconds of submission, replacing a flow that previously lost lead inquiries entirely.</li>
+            <li>Reduced initial page weight by roughly 50 percent through video compression, asset optimization, and Blade partial refactoring, holding mobile load under 2 seconds.</li>
           </ul>
         </div>
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Full-Stack Developer (Contract)</span>
+            <span className="resume-entry-title">Full-Stack Developer, Contract</span>
             <span className="resume-entry-date">Nov 2025 – Feb 2026</span>
           </div>
           <div className="resume-entry-sub">
@@ -58,9 +60,9 @@ export default function ResumePanelContent() {
             <span>Palm Beach, FL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Built and deployed a production-grade insurance website using HTML/CSS, Node.js and Express, delivering a fully responsive UI and backend API system for real client use.</li>
-            <li>Reduced spam submissions by 90% by implementing rate limiting, validation logic, and secure request handling.</li>
-            <li>Configured DNS, SSL/TLS, and hosting infrastructure, successfully launching a publicly accessible site with end-to-end HTTPS security.</li>
+            <li>Designed, built, and deployed a production insurance agency site serving live client traffic, using Node.js and Express on the backend with a fully responsive HTML and CSS frontend.</li>
+            <li>Cut spam form submissions by 90 percent by layering rate limiting, server side validation, and request hardening on the public contact endpoint.</li>
+            <li>Owned end to end deployment including DNS configuration, SSL/TLS provisioning, and HTTPS hardening, taking the site from local dev to publicly accessible production.</li>
           </ul>
         </div>
       </div>
@@ -77,8 +79,8 @@ export default function ResumePanelContent() {
             <span className="resume-entry-tech">React, JavaScript, PostgreSQL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Designed and built a full-stack caregiving operations dashboard from scratch, modeling a PostgreSQL schema across three relational tables with domain-specific fields including service type, visit status, and multi-day scheduling support for 24/7 care arrangements.</li>
-            <li>Engineered real-time dashboard stats including week-over-week trend tracking, daily visit counts, and cancellation banners with live date context.</li>
+            <li>Modeled a normalized PostgreSQL schema across three relational tables to support 24/7 care coordination, including domain specific fields for service type, visit status, and multi day scheduling for overlapping caregivers and clients.</li>
+            <li>Engineered real-time dashboard analytics including week-over-week trend tracking, daily visit counts, and a live cancellation banner, giving operations staff a one screen view of agency health.</li>
           </ul>
         </div>
 
@@ -91,8 +93,8 @@ export default function ResumePanelContent() {
             <span className="resume-entry-tech">Three.js, React, Blender</span>
           </div>
           <ul className="resume-bullets">
-            <li>Engineered an interactive 3D portfolio experience using Three.js and React, combining real-time rendering with dynamic UI interactions to showcase projects in an immersive environment.</li>
-            <li>Achieved ~40% improvement in rendering performance by optimizing scene complexity through baked lighting, efficient geometry, and texture-driven rendering techniques.</li>
+            <li>Engineered an interactive 3D portfolio in Three.js and React combining real-time rendering with dynamic UI overlays for project navigation.</li>
+            <li>Improved rendering performance by ~40 percent through baked lighting, geometry simplification, and texture driven materials, holding over 60 fps on mid range hardware.</li>
           </ul>
         </div>
       </div>
@@ -102,23 +104,23 @@ export default function ResumePanelContent() {
         <div className="resume-skills-list">
           <div className="resume-skill-row">
             <span className="resume-skill-label">Languages</span>
-            <span className="resume-skill-value">HTML/CSS, JavaScript/TypeScript, Java, SQL, PHP</span>
+            <span className="resume-skill-value">JavaScript, TypeScript, HTML/CSS, SQL, Java, PHP</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Frameworks & Libraries</span>
-            <span className="resume-skill-value">React, ThreeJS, Bootstrap, Express, Laravel</span>
+            <span className="resume-skill-label">Frameworks</span>
+            <span className="resume-skill-value">React, Node.js, Express, Three.js, Laravel and Blade</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Web & Deployment</span>
-            <span className="resume-skill-value">DNS configuration, SSL/TLS setup, Railway</span>
+            <span className="resume-skill-label">Databases</span>
+            <span className="resume-skill-value">PostgreSQL, MySQL</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Tools & Platforms</span>
-            <span className="resume-skill-value">Git, Jira, Postman, Docker, AWS, Azure DevOps</span>
+            <span className="resume-skill-label">Cloud and Infrastructure</span>
+            <span className="resume-skill-value">AWS, Docker, Railway, Azure DevOps, DNS, SSL/TLS</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Systems & Concepts</span>
-            <span className="resume-skill-value">Object-Oriented Design, Data Structures, Algorithms, RESTful APIs, Agile Development</span>
+            <span className="resume-skill-label">Tools</span>
+            <span className="resume-skill-value">Git, Jira, Postman, Figma, Blender</span>
           </div>
         </div>
       </div>
