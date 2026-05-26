@@ -101,10 +101,10 @@ const projects = [
       '/img/projects/carecalendar2.webp'
     ],
     tooltip:
-      'Admin dashboard for managing home care visits, caregivers, and clients. Built as the technical portion of an interview.',
+      'Admin dashboard for managing home care visits, caregivers, and clients.',
     tools: ['React', 'FullCalendar', 'Node.js', 'Express', 'PostgreSQL', 'Railway'],
     description: [
-      'An admin dashboard built as the technical portion of a take-home interview. It gives administrators a centralized view of a caregiving operation — who is working, who they are caring for, and when — with a live calendar, dashboard stats, and full CRUD for visits, caregivers, and clients.',
+      'An admin dashboard that gives administrators a centralized view of a caregiving operation: who is working, who they are caring for, and when. It includes a live calendar, dashboard stats, and full CRUD for visits, caregivers, and clients.',
       'The dashboard features an interactive FullCalendar with month, week, and day views, week-over-week trend badges, multi-day visit spanning, hover tooltips, and smart grouping for overlapping events. The backend is built with Node.js and Express backed by raw PostgreSQL via pg, with the full stack deployed to Railway.'
     ],
     websiteUrl: 'https://carecalendar.dev',
