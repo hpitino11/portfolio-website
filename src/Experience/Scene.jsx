@@ -3,6 +3,7 @@ import Room from './models/Room_model'
 import { OrbitControls } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 
+
 const Scene = ({ introDone, onOpenPanel }) => {  const controlsRef = useRef()
   const camera = useThree((state) => state.camera)
 

@@ -9,7 +9,7 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
 export default function Model(props) {
-  const { introDone, ...rest } = props
+  const { introDone, onOpenPanel, ...rest } = props
   const { nodes, materials } = useGLTF('/models/Room_model.glb')
 
   const chairTopRef = useRef()
@@ -17,8 +17,10 @@ export default function Model(props) {
   const linkedinGroupRef = useRef()
   const githubGroupRef = useRef()
   const gmailGroupRef = useRef()
+  const screenGroupRef = useRef()
 
   const [hoveredCard, setHoveredCard] = useState(null)
+  const [hoveredScreen, setHoveredScreen] = useState(false)
 
   const [videoTexture, setVideoTexture] = useState(null)
 
@@ -32,7 +34,8 @@ export default function Model(props) {
 
     const texture = new THREE.VideoTexture(video)
     texture.colorSpace = THREE.SRGBColorSpace
-    texture.flipY = false
+    texture.repeat.set(1, -1)
+    texture.offset.set(0, 1)
     setVideoTexture(texture)
 
     return () => {
@@ -43,7 +46,6 @@ export default function Model(props) {
   }, [])
 
   const iconAnim = useRef(0)
-
 
   const linkedinPanelMaterial = useMemo(() => materials.Panels.clone(), [materials.Panels])
   const githubPanelMaterial = useMemo(() => materials.Panels.clone(), [materials.Panels])
@@ -56,11 +58,11 @@ export default function Model(props) {
   
 
   useEffect(() => {
-    document.body.style.cursor = hoveredCard ? 'pointer' : 'default'
+    document.body.style.cursor = (hoveredCard || hoveredScreen) ? 'pointer' : 'default'
     return () => {
       document.body.style.cursor = 'default'
     }
-  }, [hoveredCard])
+  }, [hoveredCard, hoveredScreen])
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
@@ -102,16 +104,18 @@ export default function Model(props) {
     return getPivotFromGeometries(nodes.Curve009.geometry, nodes.Curve009_1.geometry)
   }, [nodes])
 
+  const screenPivot = useMemo(() => {
+    return getPivotFromGeometries(nodes.Circle.geometry, nodes.Circle_1.geometry)
+  }, [nodes])
+
   const linkedinBasePos = useMemo(
     () => new THREE.Vector3(linkedinPivot.x, linkedinPivot.y, linkedinPivot.z),
     [linkedinPivot]
   )
-
   const githubBasePos = useMemo(
     () => new THREE.Vector3(githubPivot.x, githubPivot.y, githubPivot.z),
     [githubPivot]
   )
-
   const gmailBasePos = useMemo(
     () => new THREE.Vector3(gmailPivot.x, gmailPivot.y, gmailPivot.z),
     [gmailPivot]
@@ -128,41 +132,24 @@ export default function Model(props) {
 
     const resetGroup = (group, basePos, mats) => {
       if (!group.current) return
-
       group.current.position.copy(basePos)
       group.current.position.y += 0.16
       group.current.scale.setScalar(0.96)
       group.current.rotation.z = -0.08
-
       mats.forEach((mat) => setMaterialOpacity(mat, 0))
     }
 
-    resetGroup(linkedinGroupRef, linkedinBasePos, [
-      linkedinPanelMaterial,
-      linkedinIconMaterial,
-    ])
-
-    resetGroup(githubGroupRef, githubBasePos, [
-      githubPanelMaterial,
-      githubIconMaterial,
-    ])
-
-    resetGroup(gmailGroupRef, gmailBasePos, [
-      gmailIconMaterial,
-      gmailPanelMaterial,
-    ])
+    resetGroup(linkedinGroupRef, linkedinBasePos, [linkedinPanelMaterial, linkedinIconMaterial])
+    resetGroup(githubGroupRef, githubBasePos, [githubPanelMaterial, githubIconMaterial])
+    resetGroup(gmailGroupRef, gmailBasePos, [gmailIconMaterial, gmailPanelMaterial])
   }, [
     introDone,
-    linkedinBasePos,
-    githubBasePos,
-    gmailBasePos,
-    linkedinPanelMaterial,
-    linkedinIconMaterial,
-    githubPanelMaterial,
-    githubIconMaterial,
-    gmailIconMaterial,
-    gmailPanelMaterial,
+    linkedinBasePos, githubBasePos, gmailBasePos,
+    linkedinPanelMaterial, linkedinIconMaterial,
+    githubPanelMaterial, githubIconMaterial,
+    gmailIconMaterial, gmailPanelMaterial,
   ])
+
 
   useFrame((_, delta) => {
     if (!introDone) return
@@ -170,73 +157,51 @@ export default function Model(props) {
     iconAnim.current = Math.min(iconAnim.current + delta * 1.35, 1)
 
     const easeOutBounce = (x) => {
-      const n1 = 7.5625
-      const d1 = 2.75
-
-      if (x < 1 / d1) {
-        return n1 * x * x
-      } else if (x < 2 / d1) {
-        return n1 * (x -= 1.5 / d1) * x + 0.75
-      } else if (x < 2.5 / d1) {
-        return n1 * (x -= 2.25 / d1) * x + 0.9375
-      } else {
-        return n1 * (x -= 2.625 / d1) * x + 0.984375
-      }
+      const n1 = 7.5625, d1 = 2.75
+      if (x < 1 / d1) return n1 * x * x
+      if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75
+      if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375
+      return n1 * (x -= 2.625 / d1) * x + 0.984375
     }
-
     const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
+
+    const introComplete = iconAnim.current >= 1
 
     const animateIntroGroup = (group, delay, basePos, mats) => {
       if (!group.current) return
-
       const raw = Math.max(0, Math.min(1, (iconAnim.current - delay) / 0.42))
       const bounceT = easeOutBounce(raw)
       const fadeT = easeOutCubic(raw)
-
-      group.current.position.set(
-        basePos.x,
-        basePos.y + (1 - bounceT) * 0.16,
-        basePos.z
-      )
-
+      group.current.position.set(basePos.x, basePos.y + (1 - bounceT) * 0.16, basePos.z)
       group.current.rotation.z = -0.08 * (1 - fadeT)
-
-      const scale = 0.96 + (1 - 0.96) * fadeT
-      group.current.scale.setScalar(scale)
-
+      group.current.scale.setScalar(0.96 + 0.04 * fadeT)
       mats.forEach((mat) => setMaterialOpacity(mat, fadeT))
     }
 
-    
-
-    animateIntroGroup(githubGroupRef, 0.00, githubBasePos, [
-      githubPanelMaterial,
-      githubIconMaterial,
-    ])
-    animateIntroGroup(linkedinGroupRef, 0.15, linkedinBasePos, [
-      linkedinPanelMaterial,
-      linkedinIconMaterial,
-    ])
-
-    animateIntroGroup(gmailGroupRef, 0.30, gmailBasePos, [
-      gmailIconMaterial,
-      gmailPanelMaterial,
-    ])
-
-    const applyHoverLift = (group, basePos, isHovered) => {
+    const applyHoverScale = (group, isHovered) => {
       if (!group.current) return
-
-      const targetY = basePos.y + (isHovered ? 0.3 : 0)
-      group.current.position.y = THREE.MathUtils.lerp(
-        group.current.position.y,
-        targetY,
-        0.12
+      const targetScale = isHovered ? 1.1 : 1.0
+      group.current.scale.setScalar(
+        THREE.MathUtils.lerp(group.current.scale.x, targetScale, 0.12)
       )
     }
 
-    applyHoverLift(linkedinGroupRef, linkedinBasePos, hoveredCard === 'linkedin')
-    applyHoverLift(githubGroupRef, githubBasePos, hoveredCard === 'github')
-    applyHoverLift(gmailGroupRef, gmailBasePos, hoveredCard === 'gmail')
+    if (!introComplete) {
+      animateIntroGroup(githubGroupRef, 0.00, githubBasePos, [githubPanelMaterial, githubIconMaterial])
+      animateIntroGroup(linkedinGroupRef, 0.15, linkedinBasePos, [linkedinPanelMaterial, linkedinIconMaterial])
+      animateIntroGroup(gmailGroupRef, 0.30, gmailBasePos, [gmailIconMaterial, gmailPanelMaterial])
+    } else {
+      applyHoverScale(linkedinGroupRef, hoveredCard === 'linkedin')
+      applyHoverScale(githubGroupRef, hoveredCard === 'github')
+      applyHoverScale(gmailGroupRef, hoveredCard === 'gmail')
+    }
+
+    if (screenGroupRef.current) {
+      const targetScale = hoveredScreen ? 1.05 : 1.0
+      screenGroupRef.current.scale.setScalar(
+        THREE.MathUtils.lerp(screenGroupRef.current.scale.x, targetScale, 0.1)
+      )
+    }
   })
 
   const openExternal = (url) => {
@@ -289,13 +254,29 @@ export default function Model(props) {
 
       <mesh geometry={nodes.TextureSetOne.geometry} material={materials.TextureSetOne} />
       <mesh geometry={nodes.TextureSetTwo.geometry} material={materials.TextureSetTwo} />
-      <mesh geometry={nodes.Circle.geometry} material={materials['Material.005']} />
-      <mesh geometry={nodes.Circle_1.geometry}>
-        {videoTexture
-          ? <meshBasicMaterial map={videoTexture} toneMapped={false} />
-          : <primitive object={materials.screen} attach="material" />
-        }
-      </mesh>
+      {/* Screen / Monitor — hover to preview, click to open projects */}
+      <group
+        ref={screenGroupRef}
+        position={[screenPivot.x, screenPivot.y, screenPivot.z]}
+        onPointerOver={(e) => { e.stopPropagation(); setHoveredScreen(true) }}
+        onPointerOut={() => setHoveredScreen(false)}
+        onClick={(e) => { e.stopPropagation(); onOpenPanel?.('projects') }}
+      >
+        <mesh
+          geometry={nodes.Circle.geometry}
+          material={materials['Material.005']}
+          position={[-screenPivot.x, -screenPivot.y, -screenPivot.z]}
+        />
+        <mesh
+          geometry={nodes.Circle_1.geometry}
+          position={[-screenPivot.x, -screenPivot.y, -screenPivot.z]}
+        >
+          {videoTexture
+            ? <meshBasicMaterial map={videoTexture} toneMapped={false} />
+            : <primitive object={materials.screen} attach="material" />
+          }
+        </mesh>
+      </group>
 
       <mesh
         ref={chairTopRef}
