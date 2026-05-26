@@ -8,16 +8,6 @@ import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
-const easeOutBounce = (x) => {
-  const n1 = 7.5625, d1 = 2.75
-  if (x < 1 / d1) return n1 * x * x
-  if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75
-  if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375
-  return n1 * (x -= 2.625 / d1) * x + 0.984375
-}
-
-const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
-
 export default function Model(props) {
   const { introDone, ...rest } = props
   const { nodes, materials } = useGLTF('/models/Room_model.glb')
@@ -30,7 +20,30 @@ export default function Model(props) {
 
   const [hoveredCard, setHoveredCard] = useState(null)
 
+  const [videoTexture, setVideoTexture] = useState(null)
+
+  useEffect(() => {
+    const video = document.createElement('video')
+    video.src = '/videos/screen.mp4'
+    video.loop = true
+    video.muted = true
+    video.playsInline = true
+    video.play().catch(() => {})
+
+    const texture = new THREE.VideoTexture(video)
+    texture.colorSpace = THREE.SRGBColorSpace
+    texture.flipY = false
+    setVideoTexture(texture)
+
+    return () => {
+      video.pause()
+      video.src = ''
+      texture.dispose()
+    }
+  }, [])
+
   const iconAnim = useRef(0)
+
 
   const linkedinPanelMaterial = useMemo(() => materials.Panels.clone(), [materials.Panels])
   const githubPanelMaterial = useMemo(() => materials.Panels.clone(), [materials.Panels])
@@ -40,12 +53,22 @@ export default function Model(props) {
   const githubIconMaterial = useMemo(() => materials.Github.clone(), [materials.Github])
   const gmailIconMaterial = useMemo(() => materials.Gmail.clone(), [materials.Gmail])
 
+  
+
   useEffect(() => {
     document.body.style.cursor = hoveredCard ? 'pointer' : 'default'
-    return () => { document.body.style.cursor = 'default' }
+    return () => {
+      document.body.style.cursor = 'default'
+    }
   }, [hoveredCard])
 
-  const iconAnimDone = useRef(false)
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+
+    if (chairTopRef.current) {
+      chairTopRef.current.rotation.y = Math.sin(t * 0.8) * 0.1
+    }
+  })
 
   const getPivotFromGeometries = (...geometries) => {
     const tempBox = new THREE.Box3()
@@ -141,16 +164,27 @@ export default function Model(props) {
     gmailPanelMaterial,
   ])
 
-  useFrame((state, delta) => {
-    const t = state.clock.getElapsedTime()
-
-    if (chairTopRef.current) {
-      chairTopRef.current.rotation.y = Math.sin(t * 0.8) * 0.1
-    }
-
+  useFrame((_, delta) => {
     if (!introDone) return
 
     iconAnim.current = Math.min(iconAnim.current + delta * 1.35, 1)
+
+    const easeOutBounce = (x) => {
+      const n1 = 7.5625
+      const d1 = 2.75
+
+      if (x < 1 / d1) {
+        return n1 * x * x
+      } else if (x < 2 / d1) {
+        return n1 * (x -= 1.5 / d1) * x + 0.75
+      } else if (x < 2.5 / d1) {
+        return n1 * (x -= 2.25 / d1) * x + 0.9375
+      } else {
+        return n1 * (x -= 2.625 / d1) * x + 0.984375
+      }
+    }
+
+    const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
 
     const animateIntroGroup = (group, delay, basePos, mats) => {
       if (!group.current) return
@@ -173,6 +207,8 @@ export default function Model(props) {
       mats.forEach((mat) => setMaterialOpacity(mat, fadeT))
     }
 
+    
+
     animateIntroGroup(githubGroupRef, 0.00, githubBasePos, [
       githubPanelMaterial,
       githubIconMaterial,
@@ -181,12 +217,11 @@ export default function Model(props) {
       linkedinPanelMaterial,
       linkedinIconMaterial,
     ])
+
     animateIntroGroup(gmailGroupRef, 0.30, gmailBasePos, [
       gmailIconMaterial,
       gmailPanelMaterial,
     ])
-
-    if (iconAnim.current >= 1) iconAnimDone.current = true
 
     const applyHoverLift = (group, basePos, isHovered) => {
       if (!group.current) return
@@ -230,12 +265,14 @@ export default function Model(props) {
       <mesh geometry={nodes.Lighting.geometry} material={materials['Emission Light']} />
 
       <mesh geometry={nodes.Window.geometry}>
-        <meshStandardMaterial
-          transparent
-          opacity={0.08}
+        <meshPhysicalMaterial
+          transmission={1}
           roughness={0}
-          metalness={0.1}
-          color="#a8c8ff"
+          thickness={0.1}
+          ior={1.3}
+          transparent
+          opacity={1}
+          envMapIntensity={0.4}
         />
       </mesh>
 
@@ -253,7 +290,12 @@ export default function Model(props) {
       <mesh geometry={nodes.TextureSetOne.geometry} material={materials.TextureSetOne} />
       <mesh geometry={nodes.TextureSetTwo.geometry} material={materials.TextureSetTwo} />
       <mesh geometry={nodes.Circle.geometry} material={materials['Material.005']} />
-      <mesh geometry={nodes.Circle_1.geometry} material={materials.screen} />
+      <mesh geometry={nodes.Circle_1.geometry}>
+        {videoTexture
+          ? <meshBasicMaterial map={videoTexture} toneMapped={false} />
+          : <primitive object={materials.screen} attach="material" />
+        }
+      </mesh>
 
       <mesh
         ref={chairTopRef}

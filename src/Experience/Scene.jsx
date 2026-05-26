@@ -21,7 +21,7 @@ const Scene = ({ introDone, onOpenPanel }) => {  const controlsRef = useRef()
   enablePan={false}
 
   /* ZOOM — tighter */
-  minDistance={11}
+  minDistance={8}
   maxDistance={13}
 
   /* VERTICAL — tighter */

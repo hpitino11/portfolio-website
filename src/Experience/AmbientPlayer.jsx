@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
 import './AmbientPlayer.css'
 
-const YOUTUBE_VIDEO_ID = 'jfKfPfyJRdk'
+const YOUTUBE_VIDEO_ID = 'EWrX250Zhko'
 const TARGET_VOLUME = 20
 const FADE_DURATION_MS = 3000
 const FADE_STEPS = 60
@@ -32,28 +32,32 @@ export default function AmbientPlayer({ visible, panelOpen }) {
   const playerRef = useRef(null)
   const mountedRef = useRef(true)
   const fadeTimerRef = useRef(null)
-  const [muted, setMuted] = useState(false)
-  const [ready, setReady] = useState(false)
   const gesturedRef = useRef(false)
+  const [muted, setMuted] = useState(true)
+  const [ready, setReady] = useState(false)
 
   const fadeInVolume = (player) => {
     if (fadeTimerRef.current) clearInterval(fadeTimerRef.current)
-    player.unMute()
-    player.setVolume(0)
+    try {
+      player.setVolume(0)
+      player.unMute()
+      player.playVideo()
+    } catch (err) {
+      return
+    }
     let step = 0
     fadeTimerRef.current = setInterval(() => {
       if (!mountedRef.current) { clearInterval(fadeTimerRef.current); return }
       step++
       const vol = Math.round((step / FADE_STEPS) * TARGET_VOLUME)
-      player.setVolume(vol)
+      try { player.setVolume(vol) } catch (e) { clearInterval(fadeTimerRef.current); return }
       if (step >= FADE_STEPS) clearInterval(fadeTimerRef.current)
     }, FADE_DURATION_MS / FADE_STEPS)
     setMuted(false)
   }
 
-  // Listen for any gesture while the curtain is still showing.
-  // Cleaned up the moment visible becomes true, so it never races
-  // with the mute button's own click handler.
+  // Track the "click anywhere to continue" gesture while the entry curtain is up.
+  // Cleaned up when visible becomes true so it never races with the mute button.
   useEffect(() => {
     if (visible) return
     const onGesture = () => { gesturedRef.current = true }
@@ -70,7 +74,7 @@ export default function AmbientPlayer({ visible, panelOpen }) {
     if (!visible) return
 
     loadYouTubeApi().then(() => {
-      if (!mountedRef.current || !containerRef.current) return
+      if (!mountedRef.current || !containerRef.current || playerRef.current) return
 
       playerRef.current = new window.YT.Player(containerRef.current, {
         videoId: YOUTUBE_VIDEO_ID,
@@ -87,10 +91,14 @@ export default function AmbientPlayer({ visible, panelOpen }) {
         },
         events: {
           onReady: (e) => {
-            e.target.playVideo()
             if (!mountedRef.current) return
+            playerRef.current = e.target
+            e.target.playVideo()
             setReady(true)
             if (gesturedRef.current) fadeInVolume(e.target)
+          },
+          onError: (e) => {
+            console.error('[AmbientPlayer] Player error code', e.data)
           },
         },
       })
@@ -108,12 +116,11 @@ export default function AmbientPlayer({ visible, panelOpen }) {
 
   const toggleMute = () => {
     if (!playerRef.current || !ready) return
-    const nowMuted = playerRef.current.isMuted()
-    if (nowMuted) {
+    if (muted) {
       fadeInVolume(playerRef.current)
     } else {
       if (fadeTimerRef.current) clearInterval(fadeTimerRef.current)
-      playerRef.current.mute()
+      try { playerRef.current.mute() } catch (e) {}
       setMuted(true)
     }
   }
