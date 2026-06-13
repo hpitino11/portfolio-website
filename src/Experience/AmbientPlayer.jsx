@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
 import './AmbientPlayer.css'
 
-const YOUTUBE_VIDEO_ID = 'EWrX250Zhko'
+const YOUTUBE_VIDEO_ID = 'X4VbdwhkE10'
 const TARGET_VOLUME = 20
 const FADE_DURATION_MS = 3000
 const FADE_STEPS = 60

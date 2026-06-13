@@ -12,8 +12,9 @@ export default function ResumePanelContent() {
           <a href="mailto:hapitino@gmail.com">hapitino@gmail.com</a>
           <span className="resume-contact-dot">●</span>
           <a href="https://hannapitino.com" target="_blank" rel="noopener noreferrer">hannapitino.com</a>
-          <span className="resume-contact-dot">●</span>
-          <a href="https://linkedin.com/in/hanna-pitino" target="_blank" rel="noopener noreferrer">linkedin.com/in/hanna-pitino</a>
+        </p>
+        <p className="resume-summary">
+          Full-stack React and Node.js developer with a strong design sensibility, two production client sites, and a portfolio that spans JWT-authenticated apps, real-time dashboards, and a 3D interactive environment.
         </p>
       </div>
 
@@ -25,7 +26,7 @@ export default function ResumePanelContent() {
             <span className="resume-entry-date">Aug 2022 – Aug 2025</span>
           </div>
           <div className="resume-entry-sub">
-            <span>Bachelor of Science in Computer Science</span>
+            <span>B.S. Computer Science | Provost Scholar</span>
             <span>Orlando, FL</span>
           </div>
         </div>
@@ -36,7 +37,7 @@ export default function ResumePanelContent() {
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Full-Stack Developer, Contract</span>
+            <span className="resume-entry-title">Full-Stack Developer, Freelance</span>
             <span className="resume-entry-date">Feb 2026 – Present</span>
           </div>
           <div className="resume-entry-sub">
@@ -44,15 +45,15 @@ export default function ResumePanelContent() {
             <span>Port Saint Lucie, FL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Shipped a multipage Laravel and Blade marketing site for a water and fire damage restoration company, owning the full stack from PHP 8.4 backend to a custom responsive UI with no external framework dependencies.</li>
-            <li>Built a Resend backed contact pipeline with server side validation that routes inbound client leads to ownership within seconds of submission, replacing a flow that previously lost lead inquiries entirely.</li>
-            <li>Reduced initial page weight by roughly 50 percent through video compression, asset optimization, and Blade partial refactoring, holding mobile load under 2 seconds.</li>
+            <li>Delivered a full-stack marketing site using a PHP/Laravel backend and a custom responsive frontend, taking the project from zero to production with no external UI framework dependencies.</li>
+            <li>Integrated a Resend-backed contact pipeline with server-side validation that routes client leads to ownership in seconds, replacing a broken flow that had been losing inquiries entirely.</li>
+            <li>Reduced page weight by ~50% through video compression, asset optimization, and template refactoring, achieving sub-2-second mobile load times.</li>
           </ul>
         </div>
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Full-Stack Developer, Contract</span>
+            <span className="resume-entry-title">Full-Stack Developer, Freelance</span>
             <span className="resume-entry-date">Nov 2025 – Feb 2026</span>
           </div>
           <div className="resume-entry-sub">
@@ -60,9 +61,8 @@ export default function ResumePanelContent() {
             <span>Palm Beach, FL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Designed, built, and deployed a production insurance agency site serving live client traffic, using Node.js and Express on the backend with a fully responsive HTML and CSS frontend.</li>
-            <li>Cut spam form submissions by 90 percent by layering rate limiting, server side validation, and request hardening on the public contact endpoint.</li>
-            <li>Owned end to end deployment including DNS configuration, SSL/TLS provisioning, and HTTPS hardening, taking the site from local dev to publicly accessible production.</li>
+            <li>Built and deployed a production site for an insurance agency using React, Node.js, and Express, delivering a fully responsive frontend and RESTful API backend for live client use.</li>
+            <li>Cut spam form submissions by 90% with rate limiting, server-side validation, and request hardening on the public-facing contact endpoint.</li>
           </ul>
         </div>
       </div>
@@ -72,29 +72,43 @@ export default function ResumePanelContent() {
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Full-Stack Admin Dashboard</span>
-            <span className="resume-entry-date">May 2026</span>
+            <span className="resume-entry-title">Mewcha | Boba Cafe Ordering App</span>
+            <span className="resume-entry-date">Jun 2026</span>
           </div>
           <div className="resume-entry-sub">
-            <span className="resume-entry-tech">React, JavaScript, PostgreSQL</span>
+            <span className="resume-entry-tech">React, TypeScript, Node.js, Express, PostgreSQL</span>
           </div>
           <ul className="resume-bullets">
-            <li>Modeled a normalized PostgreSQL schema across three relational tables to support 24/7 care coordination, including domain specific fields for service type, visit status, and multi day scheduling for overlapping caregivers and clients.</li>
-            <li>Engineered real-time dashboard analytics including week-over-week trend tracking, daily visit counts, and a live cancellation banner, giving operations staff a one screen view of agency health.</li>
+            <li>Shipped a full-stack ordering platform with a React/TypeScript storefront and separate admin dashboard, implementing JWT authentication with role-based middleware guards to enforce access control across both interfaces.</li>
+            <li>Designed a normalized PostgreSQL schema with Knex migrations supporting customization, cart state, and order history, plus a RESTful Node.js/Express API with protected admin routes.</li>
           </ul>
         </div>
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">3D Portfolio Environment</span>
+            <span className="resume-entry-title">CareCalendar | Caregiving Operations Dashboard</span>
+            <span className="resume-entry-date">May 2026</span>
+          </div>
+          <div className="resume-entry-sub">
+            <span className="resume-entry-tech">React, Node.js, Express, PostgreSQL</span>
+          </div>
+          <ul className="resume-bullets">
+            <li>Developed a caregiving operations dashboard including a React frontend and Node.js/PostgreSQL backend, modeling a 3-table relational schema for service tracking, visit status, and multi-day scheduling.</li>
+            <li>Engineered real-time analytics including week-over-week trends, daily visit counts, and a live cancellation banner, giving operations staff a one-screen view of agency health.</li>
+          </ul>
+        </div>
+
+        <div className="resume-entry">
+          <div className="resume-entry-header">
+            <span className="resume-entry-title">Roomfolio | 3D Interactive Portfolio</span>
             <span className="resume-entry-date">Mar 2026</span>
           </div>
           <div className="resume-entry-sub">
-            <span className="resume-entry-tech">Three.js, React, Blender</span>
+            <span className="resume-entry-tech">React, Three.js, Blender</span>
           </div>
           <ul className="resume-bullets">
-            <li>Engineered an interactive 3D portfolio in Three.js and React combining real-time rendering with dynamic UI overlays for project navigation.</li>
-            <li>Improved rendering performance by ~40 percent through baked lighting, geometry simplification, and texture driven materials, holding over 60 fps on mid range hardware.</li>
+            <li>Created a real-time 3D portfolio environment in React and Three.js from scratch with no starter template, combining custom scene composition and dynamic UI overlays.</li>
+            <li>Improved rendering performance by ~40% through baked lighting, geometry simplification, and texture-driven materials, holding 60+ fps on mid-range hardware.</li>
           </ul>
         </div>
       </div>
@@ -107,16 +121,16 @@ export default function ResumePanelContent() {
             <span className="resume-skill-value">JavaScript, TypeScript, HTML/CSS, SQL, Java, PHP</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Frameworks</span>
-            <span className="resume-skill-value">React, Node.js, Express, Three.js, Laravel and Blade</span>
+            <span className="resume-skill-label">Frontend</span>
+            <span className="resume-skill-value">React, Three.js, CSS Modules, Responsive Design, Component-Based Architecture</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Databases</span>
-            <span className="resume-skill-value">PostgreSQL, MySQL</span>
+            <span className="resume-skill-label">Backend</span>
+            <span className="resume-skill-value">Node.js, Express, REST APIs, PostgreSQL, MySQL, Knex</span>
           </div>
           <div className="resume-skill-row">
-            <span className="resume-skill-label">Cloud and Infrastructure</span>
-            <span className="resume-skill-value">AWS, Docker, Railway, Azure DevOps, DNS, SSL/TLS</span>
+            <span className="resume-skill-label">Cloud & Infrastructure</span>
+            <span className="resume-skill-value">Railway, AWS, Docker, DNS, SSL/TLS</span>
           </div>
           <div className="resume-skill-row">
             <span className="resume-skill-label">Tools</span>

@@ -6,6 +6,7 @@ import LoaderOverlay from './LoaderOverlay'
 import QuickActions from './QuickActions'
 import InfoPanel from './InfoPanel'
 import AmbientPlayer from './AmbientPlayer'
+import CustomCursor from './CustomCursor'
 import './Experience.css'
 
 const Experience = () => {
@@ -14,6 +15,7 @@ const Experience = () => {
 
   return (
     <div className="experience">
+      <CustomCursor />
      <Navbar visible={introDone} onOpenPanel={setActivePanel} />
 
       {!introDone && <LoaderOverlay onFinish={() => setIntroDone(true)} />}
