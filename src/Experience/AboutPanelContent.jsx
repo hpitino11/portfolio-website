@@ -54,9 +54,9 @@ export default function AboutPanelContent() {
         {pageIndex === 1 && (
           <div className="about-page about-page-show">
             <div className="about-photo-grid">
-              <img src="/img/about/img1.jpg" alt="Hanna portrait 1" className="about-photo about-photo-large" />
-              <img src="/img/about/img2.jpg" alt="Hanna portrait 2" className="about-photo" />
-              <img src="/img/about/img3.jpg" alt="Hanna portrait 3" className="about-photo" />
+              <img src="/img/about/img1.webp" alt="Hanna portrait 1" className="about-photo about-photo-large" loading="lazy" decoding="async" />
+              <img src="/img/about/img2.webp" alt="Hanna portrait 2" className="about-photo" loading="lazy" decoding="async" />
+              <img src="/img/about/img3.webp" alt="Hanna portrait 3" className="about-photo" loading="lazy" decoding="async" />
             </div>
 
             <div className="about-copy-card">
@@ -200,9 +200,9 @@ export default function AboutPanelContent() {
 
       {/* IMAGE GRID */}
       <div className="personal-photo-grid">
-        <img src="/img/personal/1.png" alt="Hobby 1" />
-        <img src="/img/personal/2.jpg" alt="Hobby 2" />
-        <img src="/img/personal/3.png" alt="Hobby 3" />
+        <img src="/img/personal/1.webp" alt="Hobby 1" loading="lazy" decoding="async" />
+        <img src="/img/personal/2.webp" alt="Hobby 2" loading="lazy" decoding="async" />
+        <img src="/img/personal/3.webp" alt="Hobby 3" loading="lazy" decoding="async" />
       </div>
 
       {/* TEXT */}

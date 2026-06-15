@@ -8,6 +8,15 @@ import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 
+const easeOutBounce = (x) => {
+  const n1 = 7.5625, d1 = 2.75
+  if (x < 1 / d1) return n1 * x * x
+  if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75
+  if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375
+  return n1 * (x -= 2.625 / d1) * x + 0.984375
+}
+const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
+
 export default function Model(props) {
   const { introDone, onOpenPanel, ...rest } = props
   const { nodes, materials } = useGLTF('/models/Room_model.glb')
@@ -155,15 +164,6 @@ export default function Model(props) {
     if (!introDone) return
 
     iconAnim.current = Math.min(iconAnim.current + delta * 1.35, 1)
-
-    const easeOutBounce = (x) => {
-      const n1 = 7.5625, d1 = 2.75
-      if (x < 1 / d1) return n1 * x * x
-      if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75
-      if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375
-      return n1 * (x -= 2.625 / d1) * x + 0.984375
-    }
-    const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
 
     const introComplete = iconAnim.current >= 1
 

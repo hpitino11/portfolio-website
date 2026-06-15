@@ -25,10 +25,10 @@ const Experience = () => {
           position: [4.231, 3.278, 3.335],
           fov: 60,
           near: 0.1,
-          far: 100
+          far: 25
         }}
         flat
-        dpr={[1, 1.5]}
+        dpr={1}
         gl={{ antialias: true, powerPreference: 'high-performance' }}
       >
         <Suspense fallback={null}>

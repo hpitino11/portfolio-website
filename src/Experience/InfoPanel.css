@@ -21,9 +21,9 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 38vw;
-  min-width: 420px;
-  max-width: 700px;
+  width: 42vw;
+  min-width: 460px;
+  max-width: 780px;
   height: 100vh;
   z-index: 2900;
 
