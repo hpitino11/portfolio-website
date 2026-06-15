@@ -79,7 +79,7 @@ export default function AboutPanelContent() {
                   <span className="about-stat-label">Contracts</span>
                 </div>
                 <div className="about-stat">
-                  <span className="about-stat-num">4</span>
+                  <span className="about-stat-num">6</span>
                   <span className="about-stat-label">Sites Shipped</span>
                 </div>
                 <div className="about-stat">
