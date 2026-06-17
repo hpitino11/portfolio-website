@@ -117,6 +117,21 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.about-copy-card--personal {
+  padding: 14px 16px;
+}
+
+.about-copy-card--personal h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.about-copy-card--personal > p {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+
 .about-copy-card h3 {
   margin: 0 0 12px 0;
   color: white;
@@ -217,15 +232,15 @@
 }
 
 .personal-interest-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -344,8 +359,9 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 12px;
-  margin: 16px 0 18px 0;
+  gap: 7px;
+  height: 110px;
+  margin: 8px 0 10px 0;
 }
 
 .personal-photo-grid img {
@@ -380,13 +396,13 @@
 .personal-interests-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .personal-interest-card {
-  padding: 16px;
-  border-radius: 16px;
+  padding: 10px 12px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.045);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition:
@@ -396,22 +412,23 @@
 }
 
 .personal-interest-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.07);
   border-color: rgba(255, 255, 255, 0.12);
 }
 
 .personal-interest-card h4 {
-  margin: 0 0 8px 0;
+  margin: 0 0 3px 0;
   color: white;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
 .personal-interest-card p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.84);
-  line-height: 1.65;
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
 }
 
 .about-nav {

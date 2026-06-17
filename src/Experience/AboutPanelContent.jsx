@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, Code2, Layout, Users, Layers, Gamepad2, Sparkles, TrendingUp } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Code2, Layout, Users, Layers, UtensilsCrossed, Sparkles, PawPrint } from 'lucide-react'
 import './AboutPanelContent.css'
 
 const pages = [
@@ -194,7 +194,7 @@ export default function AboutPanelContent() {
 )}
 {pageIndex === 3 && (
   <div className="about-page about-page-show">
-    <div className="about-copy-card">
+    <div className="about-copy-card about-copy-card--personal">
 
       <h3>Beyond the Work</h3>
 
@@ -207,13 +207,13 @@ export default function AboutPanelContent() {
 
       {/* TEXT */}
       <p>
-        Outside of development, I spend a lot of time exploring creative ideas and refining visual details.
-        I enjoy building things that feel intentional, whether that’s a web project, a 3D scene, or a concept I want to bring to life.
+        Outside of development, I am drawn to anything that lets me be creative or hands-on.
+        I have a soft spot for animals, love exploring new places, and find a lot of joy in the kind of experiences that are hard to plan for.
       </p>
 
       <p>
-        I’m especially drawn to interactive experiences, games, digital design, and immersive environments.
-        A lot of what inspires me creatively also carries into my work as a developer.
+        Baking is one of the ways I channel that same attention to detail I bring to development.
+        There is something satisfying about treating a recipe like a project, tweaking and iterating until it is exactly right, and making it look just as good as it tastes.
       </p>
 
       {/* CARDS */}
@@ -221,22 +221,22 @@ export default function AboutPanelContent() {
         <div className="personal-interest-card">
           <div className="personal-interest-icon"><Layers size={14} strokeWidth={1.8} /></div>
           <h4>Creative Projects</h4>
-          <p>3D environments, visual concepts, UI polish, and iterative design work.</p>
+          <p>3D modeling, character design, visual concepts, and anything that blurs the line between art and code.</p>
         </div>
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><Gamepad2 size={14} strokeWidth={1.8} /></div>
-          <h4>Interactive Media</h4>
-          <p>Games, immersive experiences, and design-driven projects.</p>
+          <div className="personal-interest-icon"><UtensilsCrossed size={14} strokeWidth={1.8} /></div>
+          <h4>Baking</h4>
+          <p>Experimenting with recipes, building layers of flavor, and making things that feel as considered as they look.</p>
         </div>
         <div className="personal-interest-card">
           <div className="personal-interest-icon"><Sparkles size={14} strokeWidth={1.8} /></div>
           <h4>Aesthetic Design</h4>
-          <p>Modern spaces, cohesive visuals, and clean presentation.</p>
+          <p>Cohesive visuals, clean presentation, and a strong eye for what makes something feel polished.</p>
         </div>
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><TrendingUp size={14} strokeWidth={1.8} /></div>
-          <h4>Iteration & Growth</h4>
-          <p>Refining work over time and continuously improving ideas.</p>
+          <div className="personal-interest-icon"><PawPrint size={14} strokeWidth={1.8} /></div>
+          <h4>Animals and Outdoors</h4>
+          <p>A genuine love of animals, a curiosity for new places, and the belief that the best days usually involve both.</p>
         </div>
       </div>
 

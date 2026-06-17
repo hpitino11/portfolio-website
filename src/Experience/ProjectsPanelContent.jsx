@@ -6,6 +6,7 @@ const projects = [
   {
     id: 'apex',
     title: 'Apex Mitigation',
+    preview: '/img/preview/apexmit.webp',
     images: [
       '/img/projects/apex.webp',
       '/img/projects/apex-2.webp',
@@ -21,12 +22,13 @@ const projects = [
     ],
     websiteUrl: 'https://apexmitigation.com',
     websiteLabel: 'Visit Live Site',
-    category: 'Contract',
+    category: 'Freelance',
     comingSoon: false
   },
   {
     id: 'insurance',
     title: 'Insurance Agency Website',
+    preview: '/img/preview/CoastalView.webp',
     images: [
       '/img/projects/insurance.webp',
       '/img/projects/insurance-2.webp',
@@ -41,12 +43,13 @@ const projects = [
     ],
     websiteUrl: 'https://coastalviewins.com/',
     websiteLabel: 'Visit Live Site',
-    category: 'Contract',
+    category: 'Freelance',
     comingSoon: false
   },
   {
     id: 'mewcha',
     title: 'Mewcha',
+    preview: '/img/preview/mewcha.webp',
     images: [
       '/img/projects/mewcha1.webp',
       '/img/projects/mewcha2.webp',
@@ -67,6 +70,7 @@ const projects = [
   {
     id: 'carecalendar',
     title: 'Care Calendar',
+    preview: '/img/preview/carecalendar.webp',
     images: [
       '/img/projects/carecalendar.webp',
       '/img/projects/carecalendar2.webp'
@@ -148,16 +152,27 @@ export default function ProjectsPanelContent() {
 
     return (
       <div className="projects-detail-view projects-fade-in">
-        <button
-          type="button"
-          className="projects-back-btn"
-          onClick={() => setSelectedProject(null)}
-        >
-          <ArrowLeft size={13} strokeWidth={2} />
-          Back to Projects
-        </button>
+        <div className="project-detail-header">
+          <button
+            type="button"
+            className="projects-back-btn"
+            onClick={() => setSelectedProject(null)}
+          >
+            <ArrowLeft size={13} strokeWidth={2} />
+            Back to Projects
+          </button>
+        </div>
 
-        {/* Hero image with title baked into gradient */}
+        <div className="project-detail-title-row">
+          <h3 className="project-detail-title">{selectedProject.title}</h3>
+          {selectedProject.category && (
+            <span className={`project-detail-tag project-detail-tag--${selectedProject.category.toLowerCase()}`}>
+              {selectedProject.category}
+            </span>
+          )}
+        </div>
+
+        {/* Hero image */}
         <div className="project-hero">
           <img
             src={activeImage}
@@ -167,14 +182,7 @@ export default function ProjectsPanelContent() {
             decoding="async"
           />
 
-          <div className="project-hero-overlay">
-            <div className="project-hero-meta">
-              {selectedProject.category && (
-                <span className="project-hero-category">{selectedProject.category}</span>
-              )}
-              <h3 className="project-hero-title">{selectedProject.title}</h3>
-            </div>
-          </div>
+          <div className="project-hero-overlay" />
 
           {selectedProject.images.length > 1 && (
             <>
@@ -194,20 +202,23 @@ export default function ProjectsPanelContent() {
               >
                 <ChevronRight size={14} strokeWidth={2} />
               </button>
-              <div className="project-image-dots">
-                {selectedProject.images.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    className={`project-image-dot ${currentImageIndex === index ? 'active' : ''}`}
-                    onClick={() => setCurrentImageIndex(index)}
-                    aria-label={`Go to image ${index + 1}`}
-                  />
-                ))}
-              </div>
             </>
           )}
         </div>
+
+        {selectedProject.images.length > 1 && (
+          <div className="project-image-dots">
+            {selectedProject.images.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`project-image-dot ${currentImageIndex === index ? 'active' : ''}`}
+                onClick={() => setCurrentImageIndex(index)}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Body content */}
         <div className="project-detail-body">
@@ -240,10 +251,9 @@ export default function ProjectsPanelContent() {
               href={selectedProject.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="project-visit-btn"
+              className="project-detail-visit-bottom"
             >
-              {selectedProject.websiteLabel ?? 'Visit Live Site'}
-              <span className="project-visit-arrow">↗</span>
+              {selectedProject.websiteLabel ?? 'Visit Live Site'} ↗
             </a>
           )}
         </div>
@@ -268,7 +278,7 @@ export default function ProjectsPanelContent() {
             onClick={() => openProject(project)}
           >
             <img
-              src={project.images[0]}
+              src={project.preview ?? project.images[0]}
               alt={project.title}
               className="project-row-thumb"
               loading="lazy"
@@ -278,11 +288,9 @@ export default function ProjectsPanelContent() {
             <div className="project-row-body">
               <span className="project-row-title">{project.title}</span>
               <p className="project-row-blurb">{project.tooltip}</p>
-              <div className="project-row-chips">
-                {project.tools.slice(0, 3).map((tool) => (
-                  <span key={tool} className="project-row-chip">{tool}</span>
-                ))}
-              </div>
+              <span className="project-row-stack">
+                {project.tools.slice(0, 3).join(' · ')}
+              </span>
             </div>
 
             {project.category && (
