@@ -10,6 +10,8 @@ export default function LoaderOverlay({ onFinish }) {
   const [fastOpen, setFastOpen] = useState(false)
   const clickedRef = useRef(false)
   const startedRef = useRef(false)
+  const introTimersRef = useRef([])
+  const finishTimerRef = useRef(null)
 
   // Smoothed progress: eases toward the real value each frame so the
   // fill and counter glide instead of jumping between asset milestones.
@@ -54,27 +56,50 @@ export default function LoaderOverlay({ onFinish }) {
     const t1 = setTimeout(() => setPhase('welcome'), 1200)
     const t2 = setTimeout(() => setPhase('welcome-out'), 3600)
     const t3 = setTimeout(() => setPhase('enter'), 4400)
+    introTimersRef.current = [t1, t2, t3]
 
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+    return () => {
+      introTimersRef.current.forEach(clearTimeout)
+      introTimersRef.current = []
+    }
   }, [assetsReady])
+
+  useEffect(() => () => {
+    introTimersRef.current.forEach(clearTimeout)
+    if (finishTimerRef.current) clearTimeout(finishTimerRef.current)
+  }, [])
+
+  const cancelScheduledIntro = () => {
+    introTimersRef.current.forEach(clearTimeout)
+    introTimersRef.current = []
+  }
+
+  const finishOpening = (delay) => {
+    if (finishTimerRef.current) clearTimeout(finishTimerRef.current)
+    finishTimerRef.current = setTimeout(() => {
+      setPhase('done')
+      onFinish?.()
+    }, delay)
+  }
 
   const handleClick = () => {
     if (phase !== 'enter' || clickedRef.current) return
     clickedRef.current = true
+    cancelScheduledIntro()
     setPhase('opening')
     // Slightly longer than the 1.8s curtain transition so the overlay never
     // unmounts mid-slide.
-    const t = setTimeout(() => { setPhase('done'); onFinish?.() }, 1950)
-    return () => clearTimeout(t)
+    finishOpening(1950)
   }
 
   const skipIntro = (e) => {
     e.stopPropagation()
     if (clickedRef.current) return
     clickedRef.current = true
+    cancelScheduledIntro()
     setFastOpen(true)
     setPhase('opening')
-    setTimeout(() => { setPhase('done'); onFinish?.() }, 750)
+    finishOpening(750)
   }
 
   if (phase === 'done') return null
