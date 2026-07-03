@@ -4,9 +4,10 @@ Command: npx gltfjsx@6.5.3 Room_model.glb
 */
 
 import React, { useRef, useEffect, useMemo, useState } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
+import '../ObjectLabel.css'
 
 const easeOutBounce = (x) => {
   const n1 = 7.5625, d1 = 2.75
@@ -18,7 +19,7 @@ const easeOutBounce = (x) => {
 const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
 
 export default function Model(props) {
-  const { introDone, onOpenPanel, ...rest } = props
+  const { introDone, onScreenClick, onScreenPivot, ...rest } = props
   const { nodes, materials } = useGLTF('/models/Room_model.glb')
 
   const chairTopRef = useRef()
@@ -63,6 +64,10 @@ export default function Model(props) {
   const linkedinIconMaterial = useMemo(() => materials.Linkedin.clone(), [materials.Linkedin])
   const githubIconMaterial = useMemo(() => materials.Github.clone(), [materials.Github])
   const gmailIconMaterial = useMemo(() => materials.Gmail.clone(), [materials.Gmail])
+  const screenFrameMaterial = useMemo(() => materials['Material.005'].clone(), [materials])
+
+  const hoverColor = useMemo(() => new THREE.Color('#ffffff'), [])
+  const hoverOffColor = useMemo(() => new THREE.Color('#000000'), [])
 
   
 
@@ -116,6 +121,11 @@ export default function Model(props) {
   const screenPivot = useMemo(() => {
     return getPivotFromGeometries(nodes.Circle.geometry, nodes.Circle_1.geometry)
   }, [nodes])
+
+  // Report the screen pivot up so the scene can frame the monitor
+  useEffect(() => {
+    onScreenPivot?.(screenPivot.clone())
+  }, [screenPivot, onScreenPivot])
 
   const linkedinBasePos = useMemo(
     () => new THREE.Vector3(linkedinPivot.x, linkedinPivot.y, linkedinPivot.z),
@@ -180,9 +190,19 @@ export default function Model(props) {
 
     const applyHoverScale = (group, isHovered) => {
       if (!group.current) return
-      const targetScale = isHovered ? 1.1 : 1.0
+      const targetScale = isHovered ? 1.05 : 1.0
       group.current.scale.setScalar(
         THREE.MathUtils.lerp(group.current.scale.x, targetScale, 0.12)
+      )
+    }
+
+    const applyHoverMaterial = (material, isHovered, color, intensity = 0.38) => {
+      if (!material?.emissive) return
+      material.emissive.lerp(isHovered ? color : hoverOffColor, 0.12)
+      material.emissiveIntensity = THREE.MathUtils.lerp(
+        material.emissiveIntensity ?? 0,
+        isHovered ? intensity : 0,
+        0.12
       )
     }
 
@@ -196,8 +216,16 @@ export default function Model(props) {
       applyHoverScale(gmailGroupRef, hoveredCard === 'gmail')
     }
 
+    applyHoverMaterial(linkedinPanelMaterial, hoveredCard === 'linkedin', hoverColor, 0.16)
+    applyHoverMaterial(linkedinIconMaterial, hoveredCard === 'linkedin', hoverColor, 0.1)
+    applyHoverMaterial(githubPanelMaterial, hoveredCard === 'github', hoverColor, 0.16)
+    applyHoverMaterial(githubIconMaterial, hoveredCard === 'github', hoverColor, 0.1)
+    applyHoverMaterial(gmailPanelMaterial, hoveredCard === 'gmail', hoverColor, 0.16)
+    applyHoverMaterial(gmailIconMaterial, hoveredCard === 'gmail', hoverColor, 0.1)
+    applyHoverMaterial(screenFrameMaterial, hoveredScreen, hoverColor, 0.72)
+
     if (screenGroupRef.current) {
-      const targetScale = hoveredScreen ? 1.05 : 1.0
+      const targetScale = hoveredScreen ? 1.015 : 1.0
       screenGroupRef.current.scale.setScalar(
         THREE.MathUtils.lerp(screenGroupRef.current.scale.x, targetScale, 0.1)
       )
@@ -254,17 +282,24 @@ export default function Model(props) {
 
       <mesh geometry={nodes.TextureSetOne.geometry} material={materials.TextureSetOne} />
       <mesh geometry={nodes.TextureSetTwo.geometry} material={materials.TextureSetTwo} />
-      {/* Screen / Monitor — hover to preview, click to open projects */}
+      {/* Screen / Monitor - hover to preview, click to sit down at the desk */}
       <group
         ref={screenGroupRef}
         position={[screenPivot.x, screenPivot.y, screenPivot.z]}
         onPointerOver={(e) => { e.stopPropagation(); setHoveredScreen(true) }}
         onPointerOut={() => setHoveredScreen(false)}
-        onClick={(e) => { e.stopPropagation(); onOpenPanel?.('projects') }}
+        onClick={(e) => { e.stopPropagation(); onScreenClick?.() }}
       >
+        <pointLight
+          position={[0, 0.08, 0.3]}
+          color="#eaf2ff"
+          intensity={hoveredScreen ? 1.15 : 0}
+          distance={1.5}
+          decay={2}
+        />
         <mesh
           geometry={nodes.Circle.geometry}
-          material={materials['Material.005']}
+          material={screenFrameMaterial}
           position={[-screenPivot.x, -screenPivot.y, -screenPivot.z]}
         />
         <mesh
@@ -276,6 +311,11 @@ export default function Model(props) {
             : <primitive object={materials.screen} attach="material" />
           }
         </mesh>
+        {false && (
+          <Html center distanceFactor={7} position={[0, 0.6, 0]} style={{ pointerEvents: 'none' }}>
+            <div className="object-label">Take a seat →</div>
+          </Html>
+        )}
       </group>
 
       <mesh
@@ -312,6 +352,11 @@ export default function Model(props) {
           material={linkedinIconMaterial}
           position={[-linkedinPivot.x, -linkedinPivot.y, -linkedinPivot.z]}
         />
+        {false && (
+          <Html center distanceFactor={7} position={[0, 0.45, 0]} style={{ pointerEvents: 'none' }}>
+            <div className="object-label">LinkedIn ↗</div>
+          </Html>
+        )}
       </group>
 
       {/* GitHub */}
@@ -338,6 +383,11 @@ export default function Model(props) {
           material={githubIconMaterial}
           position={[-githubPivot.x, -githubPivot.y, -githubPivot.z]}
         />
+        {false && (
+          <Html center distanceFactor={7} position={[0, 0.45, 0]} style={{ pointerEvents: 'none' }}>
+            <div className="object-label">GitHub ↗</div>
+          </Html>
+        )}
       </group>
 
       {/* Gmail */}
@@ -364,6 +414,11 @@ export default function Model(props) {
           material={gmailPanelMaterial}
           position={[-gmailPivot.x, -gmailPivot.y, -gmailPivot.z]}
         />
+        {false && (
+          <Html center distanceFactor={7} position={[0, 0.45, 0]} style={{ pointerEvents: 'none' }}>
+            <div className="object-label">Email me</div>
+          </Html>
+        )}
       </group>
 
       <mesh geometry={nodes.Cube017.geometry} material={materials['Emissive 3500']} />

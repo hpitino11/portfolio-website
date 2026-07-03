@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 .contact-panel-shell {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 26px;
   margin-top: auto;
   margin-bottom: auto;
 }
 
 .contact-intro-card {
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 0 20px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   animation: contactFadeUp 0.5s ease;
 }
 
@@ -30,7 +30,7 @@
 
 .contact-card-list {
   display: grid;
-  gap: 14px;
+  gap: 0;
   margin-top: 0;
 }
 
@@ -43,14 +43,15 @@
   text-decoration: none;
   color: inherit;
 
-  padding: 18px;
-  border-radius: 18px;
+  padding: 18px 4px;
+  border-radius: 0;
 
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
 
   opacity: 0;
-  transform: translateY(14px) scale(0.98);
+  transform: translateY(8px);
   animation: contactCardIn 0.55s ease forwards;
 
   transition:
@@ -61,10 +62,10 @@
 }
 
 .contact-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
 }
 
 .contact-card-left {
@@ -74,11 +75,11 @@
 }
 
 .contact-icon-wrap {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 36px;
+  height: 36px;
+  border-radius: 0;
+  background: transparent;
+  border: none;
 
   display: flex;
   align-items: center;
@@ -139,10 +140,10 @@
 @keyframes contactCardIn {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.98);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }

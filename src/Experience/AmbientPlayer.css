@@ -10,23 +10,23 @@
 
 .ambient-mute-btn {
   position: fixed;
-  right: 32px;
-  bottom: 32px;
+  right: 28px;
+  bottom: 28px;
   z-index: 3000;
 
-  width: 68px;
-  height: 68px;
-  border: 1.5px solid rgba(255, 255, 255, 0.95);
-  background: rgba(0, 0, 0, 0.72);
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(8, 10, 15, 0.72);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   opacity: 0;
   pointer-events: none;
@@ -52,11 +52,11 @@
 
 
 .ambient-mute-btn:hover {
-  background: white;
-  color: black;
-  border-color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.82);
+  transform: translateY(-1px);
+  box-shadow: none;
 }
 
 /* ── Mobile ── */

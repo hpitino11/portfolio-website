@@ -1,0 +1,129 @@
+
+.hero-title {
+  position: fixed;
+  left: 5vw;
+  top: 38%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1400;
+  width: auto;
+  max-width: 500px;
+}
+
+.hero-eyebrow {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-fade-in 0.6s ease-out forwards;
+  animation-delay: 400ms;
+}
+
+.hero-name {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-fade-in 0.6s ease-out forwards;
+  animation-delay: 550ms;
+}
+
+.hero-tagline {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 16px 0 0 0;
+  padding: 0;
+  line-height: 1.5;
+  max-width: 320px;
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-fade-in 0.6s ease-out forwards;
+  animation-delay: 700ms;
+}
+
+.hero-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  opacity: 0;
+  animation: hero-fade-in 0.6s ease-out forwards;
+  animation-delay: 850ms;
+}
+
+.hint-text {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: lowercase;
+  animation: hint-pulse 2.4s ease-in-out infinite;
+}
+
+.hint-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  animation: hint-drift 2.4s ease-in-out infinite;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes hint-drift {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+.hero-title.dimmed {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hero-title:not(.dimmed) {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* Mobile: hide the hero title entirely */
+@media (max-width: 900px) {
+  .hero-title {
+    display: none;
+  }
+}

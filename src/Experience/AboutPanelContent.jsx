@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, Code2, Layout, Users, Layers, UtensilsCrossed, Sparkles, PawPrint } from 'lucide-react'
+import { useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './AboutPanelContent.css'
 
 const pages = [
@@ -10,27 +10,8 @@ const pages = [
 ]
 
 export default function AboutPanelContent() {
-  const [pageIndex, setPageIndex] = useState(0)
-  const [introPlayed, setIntroPlayed] = useState(false)
-  const [introLeaving, setIntroLeaving] = useState(false)
-
-  useEffect(() => {
-    if (introPlayed) return
-
-    const leaveTimer = setTimeout(() => {
-      setIntroLeaving(true)
-    }, 1800)
-
-    const nextTimer = setTimeout(() => {
-      setPageIndex(1)
-      setIntroPlayed(true)
-    }, 2500)
-
-    return () => {
-      clearTimeout(leaveTimer)
-      clearTimeout(nextTimer)
-    }
-  }, [introPlayed])
+  const [pageIndex, setPageIndex] = useState(1)
+  const introLeaving = false
 
   const goPrev = () => {
     setPageIndex((prev) => Math.max(prev - 1, 1))
@@ -59,8 +40,7 @@ export default function AboutPanelContent() {
               <img src="/img/about/img3.webp" alt="Hanna portrait 3" className="about-photo" loading="lazy" decoding="async" />
             </div>
 
-            <div className="about-copy-card">
-              <h3>Who I Am</h3>
+            <h3>Who I Am</h3>
               <p>
                 I’m Hanna Pitino, a software developer with a strong interest in full-stack web
                 development, interactive UI, and building polished digital experiences that combine
@@ -87,12 +67,10 @@ export default function AboutPanelContent() {
                   <span className="about-stat-label">Computer Science</span>
                 </div>
               </div>
-            </div>
           </div>
         )}
 {pageIndex === 2 && (
   <div className="about-page about-page-show">
-    <div className="about-copy-card">
       <h3>Skills & Strengths</h3>
 
       <p>
@@ -168,34 +146,31 @@ export default function AboutPanelContent() {
 
       <div className="about-strength-cards">
         <div className="about-strength-card">
-          <div className="about-strength-icon"><Code2 size={15} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">01</span>
           <div>
             <h4>Full-Stack & API Work</h4>
             <p>Building and integrating RESTful APIs, structuring data flow, and connecting front-end interfaces to backend services in real-world web projects.</p>
           </div>
         </div>
         <div className="about-strength-card">
-          <div className="about-strength-icon"><Layout size={15} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">02</span>
           <div>
             <h4>Front-End Development</h4>
             <p>React-based UI development, responsive layouts, clean component structure, and creating polished experiences that feel intuitive and refined.</p>
           </div>
         </div>
         <div className="about-strength-card">
-          <div className="about-strength-icon"><Users size={15} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">03</span>
           <div>
             <h4>Collaboration & Workflow</h4>
             <p>Comfortable with Git, Jira, Docker, and deployment tooling while iterating on features, debugging, and improving usability and performance.</p>
           </div>
         </div>
       </div>
-    </div>
   </div>
 )}
 {pageIndex === 3 && (
   <div className="about-page about-page-show">
-    <div className="about-copy-card about-copy-card--personal">
-
       <h3>Beyond the Work</h3>
 
       {/* IMAGE GRID */}
@@ -207,40 +182,38 @@ export default function AboutPanelContent() {
 
       {/* TEXT */}
       <p>
-        Outside of development, I am drawn to anything that lets me be creative or hands-on.
-        I have a soft spot for animals, love exploring new places, and find a lot of joy in the kind of experiences that are hard to plan for.
+        Outside of coding, I spend a lot of my free time doing 3D modeling and character design.
+        Bringing ideas to life visually is something I really enjoy, whether that is a character concept or just something I had in my head.
       </p>
 
       <p>
-        Baking is one of the ways I channel that same attention to detail I bring to development.
-        There is something satisfying about treating a recipe like a project, tweaking and iterating until it is exactly right, and making it look just as good as it tastes.
+        I also have a genuine love for animals and enjoy getting outside whenever I can.
+        Some of my best days involve both.
       </p>
 
       {/* CARDS */}
       <div className="personal-interests-grid">
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><Layers size={14} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">01</span>
           <h4>Creative Projects</h4>
-          <p>3D modeling, character design, visual concepts, and anything that blurs the line between art and code.</p>
+          <p>In my free time I am really into 3D modeling and character design, blurring the line between art and code.</p>
         </div>
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><UtensilsCrossed size={14} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">02</span>
           <h4>Baking</h4>
-          <p>Experimenting with recipes, building layers of flavor, and making things that feel as considered as they look.</p>
+          <p>My most famous recipe is a strawberry shortcake cheesecake. I treat every bake like a project, iterating until it is perfect.</p>
         </div>
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><Sparkles size={14} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">03</span>
           <h4>Aesthetic Design</h4>
-          <p>Cohesive visuals, clean presentation, and a strong eye for what makes something feel polished.</p>
+          <p>I have always had a passion for aesthetic design and bringing a strong visual sense to everything I build.</p>
         </div>
         <div className="personal-interest-card">
-          <div className="personal-interest-icon"><PawPrint size={14} strokeWidth={1.8} /></div>
+          <span className="about-entry-num">04</span>
           <h4>Animals and Outdoors</h4>
-          <p>A genuine love of animals, a curiosity for new places, and the belief that the best days usually involve both.</p>
+          <p>I have a deep love for animals and the outdoors. Honestly some of my best days involve both.</p>
         </div>
       </div>
-
-    </div>
   </div>
 )}
       </div>

@@ -1,7 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './CustomCursor.css'
 
 export default function CustomCursor() {
+  const [isTouch] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(hover: none), (pointer: coarse)').matches
+  )
+
   const dotRef = useRef(null)
   const ringRef = useRef(null)
   const mouse = useRef({ x: -100, y: -100 })
@@ -10,6 +14,8 @@ export default function CustomCursor() {
   const isHovering = useRef(false)
 
   useEffect(() => {
+    if (isTouch) return
+
     const onMove = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY }
     }
@@ -68,7 +74,9 @@ export default function CustomCursor() {
       document.removeEventListener('mouseleave', onLeaveWindow)
       cancelAnimationFrame(rafId.current)
     }
-  }, [])
+  }, [isTouch])
+
+  if (isTouch) return null
 
   return (
     <>

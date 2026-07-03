@@ -2,7 +2,18 @@
   cursor: none !important;
 }
 
-/* ── Dot — tracks mouse exactly ── */
+@media (hover: none), (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
+/* ── Dot - tracks mouse exactly ── */
 .cursor-dot {
   position: fixed;
   top: 0;
@@ -29,7 +40,7 @@
   opacity: 0;
 }
 
-/* ── Ring — lags behind with inertia ── */
+/* ── Ring - lags behind with inertia ── */
 .cursor-ring {
   position: fixed;
   top: 0;

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 .about-panel-shell {
   height: 100%;
@@ -15,12 +14,29 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 6px;
+  scrollbar-width: none;
+}
+
+.about-page-stage::-webkit-scrollbar {
+  display: none;
 }
 
 .about-intro-card,
 .about-page {
   animation: aboutFadeUp 0.6s ease;
   padding-bottom: 20px;
+}
+
+.about-page {
+  padding: 4px 4px 20px 4px;
+}
+
+.about-page p {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+  margin: 0 0 12px 0;
 }
 
 .about-intro-card {
@@ -93,9 +109,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
 }
 
 .about-photo-large {
@@ -148,7 +164,6 @@
 .about-stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
   margin-top: 20px;
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
@@ -158,25 +173,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  padding: 14px 8px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  gap: 6px;
+  padding: 10px 8px;
+}
+
+.about-stat + .about-stat {
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 .about-stat-num {
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 500;
   color: white;
   line-height: 1;
 }
 
 .about-stat-label {
-  font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.42);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
   text-align: center;
   line-height: 1.35;
 }
@@ -184,7 +203,6 @@
 .about-strength-cards {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   margin-top: 18px;
 }
 
@@ -192,56 +210,33 @@
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  padding: 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: background 0.25s ease, border-color 0.25s ease;
+  padding: 14px 2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.about-strength-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.about-strength-icon {
-  width: 32px;
-  height: 32px;
+.about-entry-num {
   flex-shrink: 0;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 2;
+  font-variant-numeric: tabular-nums;
 }
 
 .about-strength-card h4 {
   margin: 0 0 4px 0;
   color: white;
-  font-size: 0.9rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.92rem;
   font-weight: 500;
 }
 
 .about-strength-card p {
   margin: 0;
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.62);
-  line-height: 1.6;
-}
-
-.personal-interest-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 7px;
-  color: rgba(255, 255, 255, 0.62);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
 }
 
 .skills-subtitle {
@@ -268,12 +263,12 @@
   justify-content: center;
   min-height: 92px;
   padding: 14px 10px;
-  border-radius: 14px;
+  border-radius: 6px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: default;
   opacity: 0;
-  transform: translateY(16px) scale(0.96);
+  transform: translateY(8px);
   animation: skillLogoIn 0.6s ease forwards;
   transition:
     transform 0.28s ease,
@@ -296,10 +291,10 @@
 }
 
 .skill-logo-card:hover {
-  transform: translateY(-4px) scale(1.04);
-  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.065);
   border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
 }
 
 .skill-tooltip {
@@ -309,7 +304,7 @@
   transform: translateX(-50%) translateY(8px);
   width: 220px;
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 4px;
   background: rgba(18, 18, 26, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.92);
@@ -358,17 +353,19 @@
 .personal-photo-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   gap: 7px;
-  height: 110px;
+  height: clamp(220px, 42vh, 460px);
+  overflow: hidden;
   margin: 8px 0 10px 0;
 }
 
 .personal-photo-grid img {
   width: 100%;
   height: 100%;
+  min-height: 0;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 6px;
   transition: transform 0.3s ease, filter 0.3s ease;
   opacity: 0;
   transform: translateY(12px) scale(0.98);
@@ -401,34 +398,30 @@
 }
 
 .personal-interest-card {
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
+  padding: 12px 2px 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.personal-interest-card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.12);
+.personal-interest-card .about-entry-num {
+  display: block;
+  margin-bottom: 4px;
+  line-height: 1.4;
 }
 
 .personal-interest-card h4 {
   margin: 0 0 3px 0;
   color: white;
-  font-size: 0.85rem;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.88rem;
   font-weight: 500;
 }
 
 .personal-interest-card p {
   margin: 0;
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.5;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
 }
 
 .about-nav {
@@ -446,7 +439,7 @@
 .about-nav-arrow {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.22);
   color: white;
@@ -476,9 +469,9 @@
 }
 
 .about-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.24);
   cursor: pointer;
@@ -486,7 +479,6 @@
 }
 
 .about-dot.active {
-  width: 28px;
   background: white;
 }
 

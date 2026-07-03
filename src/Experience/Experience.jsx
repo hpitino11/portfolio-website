@@ -7,14 +7,17 @@ import QuickActions from './QuickActions'
 import InfoPanel from './InfoPanel'
 import AmbientPlayer from './AmbientPlayer'
 import CustomCursor from './CustomCursor'
+import HeroTitle from './HeroTitle'
+import DesktopOverlay from './DesktopOverlay'
 import './Experience.css'
 
 const Experience = () => {
   const [introDone, setIntroDone] = useState(false)
   const [activePanel, setActivePanel] = useState(null)
+  const [screenFocus, setScreenFocus] = useState(false)
 
   return (
-    <div className="experience">
+    <div className={`experience ${screenFocus ? 'is-screen-focused' : ''}`}>
       <CustomCursor />
      <Navbar visible={introDone} onOpenPanel={setActivePanel} />
 
@@ -22,7 +25,9 @@ const Experience = () => {
 
       <Canvas
         camera={{
-          position: [4.231, 3.278, 3.335],
+          // Match Scene's intro start so the renderer never paints the final
+          // position for a frame before the opening animation is initialized.
+          position: [6.117, 4.327, 5.119],
           fov: 60,
           near: 0.1,
           far: 25
@@ -34,16 +39,23 @@ const Experience = () => {
         <Suspense fallback={null}>
 <Scene
   introDone={introDone}
-  onOpenPanel={setActivePanel}
+  screenFocus={screenFocus}
+  onScreenClick={() => setScreenFocus(true)}
 />        </Suspense>
       </Canvas>
+
+      <div className="scene-vignette" />
+
+      {introDone && <HeroTitle dimmed={!!activePanel || screenFocus} />}
+
+      <DesktopOverlay open={screenFocus} onClose={() => setScreenFocus(false)} />
 
       {introDone && (
   <>
     <QuickActions
       onSelect={setActivePanel}
       activePanel={activePanel}
-      visible={introDone}
+      visible={introDone && !screenFocus}
     />
     <InfoPanel
       activePanel={activePanel}
@@ -51,7 +63,7 @@ const Experience = () => {
     />
   </>
 )}
-      <AmbientPlayer visible={introDone} panelOpen={!!activePanel} />
+      <AmbientPlayer visible={introDone} panelOpen={!!activePanel || screenFocus} />
     </div>
   )
 }

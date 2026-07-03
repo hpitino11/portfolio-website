@@ -7,38 +7,37 @@
 /* ── Header row ── */
 .projects-header-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
   margin-bottom: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.projects-eyebrow {
+.projects-heading {
+  margin: 0;
   font-family: 'Lora', Georgia, serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.projects-count-badge {
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.55);
-  font-family: 'Lora', Georgia, serif;
-  font-size: 0.8rem;
+  font-size: 1.15rem;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: white;
+  white-space: nowrap;
 }
 
-/* ── List layout — fills panel height ── */
+.projects-header-rule {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.09);
+  align-self: center;
+}
+
+.projects-count-word {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.38);
+  white-space: nowrap;
+}
+
+/* ── List layout - fills panel height ── */
 .projects-gallery-view {
   flex: 1;
   display: flex;
@@ -51,119 +50,90 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  gap: 12px;
 }
 
+/* ── Image-only entries ── */
 .project-row {
+  position: relative;
   flex: 1;
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  min-height: 0;
   width: 100%;
-  padding: 10px 0;
+  padding: 0;
   border: none;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  overflow: hidden;
 
   opacity: 0;
   transform: translateX(-10px);
   animation: projectRowIn 0.42s ease forwards;
-  transition: background 0.2s ease;
 }
 
-.project-row:first-child {
-  border-top: 1px solid rgba(255, 255, 255, 0.055);
-}
-
-.project-row:last-child {
-  border-bottom: none;
-}
-
-.project-row:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-/* ── Thumbnail ── */
-.project-row-thumb {
-  width: clamp(130px, 26%, 200px);
-  align-self: stretch;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  flex-shrink: 0;
-  display: block;
-}
-
-/* ── Row body ── */
-.project-row-body {
-  flex: 1;
-  min-width: 0;
+.project-row-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-}
+  align-items: baseline;
+  gap: 8px;
+  padding: 26px 14px 10px;
+  background: linear-gradient(to top, rgba(5, 7, 12, 0.85), transparent);
+  border-radius: 0 0 8px 8px;
+  pointer-events: none;
+  text-align: left;
 
-.project-row-title {
   font-family: 'Lora', Georgia, serif;
-  font-size: 0.93rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: white;
-  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.94);
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.project-row-blurb {
-  margin: 0;
-  font-family: 'Lora', Georgia, serif;
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.5;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.project-row-stack {
-  font-family: 'Lora', Georgia, serif;
+.project-row-label em {
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.32);
-  letter-spacing: 0.02em;
-  margin-top: 2px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
 }
 
-/* ── Category label — no pill, just colored marker + text ── */
-.project-row-category {
-  align-self: center;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: 'Lora', Georgia, serif;
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: none;
-  border: none;
-  padding: 0;
+.project-row:hover .project-row-label,
+.project-row:focus-visible .project-row-label {
+  opacity: 1;
 }
 
-.project-row-category--freelance {
-  color: rgba(255, 195, 120, 0.78);
+/* No hover on touch - keep labels visible so the list stays scannable */
+@media (hover: none), (pointer: coarse) {
+  .project-row-label {
+    opacity: 1;
+  }
 }
 
-.project-row-category--personal {
-  color: rgba(228, 200, 255, 0.72);
+.project-row:focus-visible {
+  outline: 1px solid rgba(232, 173, 102, 0.5);
+  outline-offset: 2px;
 }
 
-.project-row-category--internship {
-  color: rgba(195, 230, 255, 0.72);
+.project-row-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  filter: brightness(0.82);
+  transition: filter 0.25s ease, transform 0.25s ease;
 }
 
-/* ── Detail view — header row ── */
+.project-row:hover .project-row-thumb,
+.project-row:focus-visible .project-row-thumb {
+  filter: brightness(1.05);
+  transform: scale(1.02);
+}
+
+/* ── Detail view - header row ── */
 .project-detail-header {
   display: flex;
   align-items: center;
@@ -178,17 +148,13 @@
   gap: 16px;
 }
 
-.project-detail-tag {
+.project-detail-category {
   font-family: 'Lora', Georgia, serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-style: italic;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.42);
 }
-
-.project-detail-tag--freelance  { color: rgba(255, 195, 120, 0.78); }
-.project-detail-tag--personal  { color: rgba(228, 200, 255, 0.72); }
-.project-detail-tag--internship { color: rgba(195, 230, 255, 0.72); }
 
 .project-detail-visit {
   font-family: 'Lora', Georgia, serif;
@@ -226,7 +192,7 @@
   border-color: white;
 }
 
-/* ── Detail view — title ── */
+/* ── Detail view - title ── */
 .project-detail-title-row {
   display: flex;
   align-items: baseline;
@@ -245,19 +211,21 @@
   font-family: 'Lora', Georgia, serif;
 }
 
-/* ── Detail view — hero ── */
+/* ── Detail view - hero ── */
 .project-hero {
   position: relative;
   width: 100%;
-  border-radius: 16px;
+  border-radius: 6px;
   overflow: hidden;
   margin-bottom: 0;
+  background: rgba(5, 9, 17, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .project-hero-image {
   width: 100%;
   height: 300px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -340,29 +308,31 @@
 }
 
 .project-section-label {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.28);
-}
-
-.project-tools-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 0.74rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-.project-tool-chip {
-  padding: 5px 12px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.78rem;
+.project-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.project-tools-line {
   font-family: 'Lora', Georgia, serif;
-  letter-spacing: 0.01em;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
 }
 
 .project-detail-copy {
@@ -374,31 +344,25 @@
 .project-detail-copy p {
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
-  line-height: 1.78;
-  font-size: 0.88rem;
+  line-height: 1.7;
+  font-size: 0.83rem;
 }
 
 .project-detail-visit-bottom {
-  display: inline-flex;
   align-self: flex-start;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.65);
-  border-radius: 8px;
-  height: 32px;
-  padding: 0 12px;
   font-family: 'Lora', Georgia, serif;
-  font-size: 0.78rem;
-  text-decoration: none;
-  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255, 255, 255, 0.25);
+  transition: color 0.22s ease, text-decoration-color 0.22s ease;
 }
 
 .project-detail-visit-bottom:hover {
-  background: white;
-  color: black;
-  border-color: white;
+  color: white;
+  text-decoration-color: white;
 }
 
 
@@ -421,13 +385,130 @@
   }
 }
 
+/* ── Clickable hero hint ── */
+.project-hero-image--clickable {
+  cursor: zoom-in;
+}
+
+/* ── Lightbox - fixed to match the info-panel exactly ── */
+.project-lightbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 42vw;
+  min-width: 460px;
+  max-width: 780px;
+  height: 100vh;
+  z-index: 2950;
+  background: rgba(10, 10, 16, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: projectsFadeUp 0.22s ease;
+}
+
+.project-lightbox-image {
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.project-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(20, 20, 28, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.project-lightbox-close:hover {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+.project-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(20, 20, 28, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project-lightbox-arrow-left { left: 14px; }
+.project-lightbox-arrow-right { right: 14px; }
+
+.project-lightbox-arrow:hover {
+  background: white;
+  color: black;
+  border-color: white;
+  transform: translateY(-50%) scale(1.06);
+}
+
+.project-lightbox-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
-  .project-row-thumb {
-    display: none;
+  .projects-gallery-view {
+    overflow-y: auto;
+  }
+
+  .projects-list {
+    flex: none;
+    overflow-y: auto;
+  }
+
+  .project-row {
+    flex: none;
+    height: 120px;
   }
 
   .project-hero-image {
     height: 220px;
+  }
+
+  .project-lightbox {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    min-width: unset;
+    max-width: unset;
+    height: 88vh;
+    border-radius: 20px 20px 0 0;
   }
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import './ProjectsPanelContent.css'
 
-const projects = [
+export const projects = [
   {
     id: 'apex',
     title: 'Apex Mitigation',
@@ -82,8 +82,6 @@ const projects = [
       'An admin dashboard that gives administrators a centralized view of a caregiving operation: who is working, who they are caring for, and when. It includes a live calendar, dashboard stats, and full CRUD for visits, caregivers, and clients.',
       'The dashboard features an interactive FullCalendar with month, week, and day views, week-over-week trend badges, multi-day visit spanning, hover tooltips, and smart grouping for overlapping events. The backend is built with Node.js and Express backed by raw PostgreSQL via pg, with the full stack deployed to Railway.'
     ],
-    websiteUrl: 'https://carecalendar.dev',
-    websiteLabel: 'Visit Live Site',
     category: 'Personal',
     comingSoon: false
   },
@@ -96,11 +94,11 @@ const projects = [
       '/img/projects/portfolio-3.webp'
     ],
     tooltip:
-      'Interactive portfolio built with 3D scene presentation, custom overlays, and immersive UI.',
+      'This site: a 3D room modeled in Blender and rendered in the browser, tuned from 35MB down to an 11MB payload.',
     tools: ['React Three Fiber', 'Three.js', 'Blender', 'CSS', 'Vite'],
     description: [
-      'An immersive portfolio experience built with React Three Fiber and Blender. It combines 3D scene presentation, modern UI overlays, camera composition, and interactive panels to create a more memorable developer portfolio.',
-      'To ensure a seamless and intentional user experience, I created design prototypes in both Blender and Figma before implementation. This allowed me to experiment with layout, camera angles, lighting, and interaction flow, translating those designs directly into the final 3D web experience with a strong focus on usability and visual polish.'
+      'This site. The room is modeled and light-baked in Blender, then shipped as a single glTF with Draco-compressed geometry and WebP lightmaps, tuned from 11.4MB down to 6MB with no visible quality loss. The monitor on the desk plays a real screen recording, re-encoded from 22MB to 2.3MB. Total transfer for the whole experience is about 11MB, down from 35MB when I started optimizing.',
+      'The camera work was the hardest part: the intro sweep interpolates spherical coordinates from outside OrbitControls\' distance limits, which exposed a one-frame flicker caused by a race between React\'s effect timing and the render loop, where a stray controls.update() clamped the camera for a single frame. Tracing it took per-frame camera instrumentation and a stack-trace hook on the controls. I prototyped the layout and camera angles in Blender and Figma first, then built the sweep, the zoom into the desk monitor, and pointer parallax, with reduced-motion fallbacks for all of it.'
     ],
     category: 'Personal',
     comingSoon: false
@@ -108,9 +106,10 @@ const projects = [
   {
     id: 'enceladus',
     title: 'Mission to Enceladus',
+    preview: '/img/preview/enceladus.png',
     images: [
-      '/img/projects/enceladus.webp',
-      '/img/projects/enceladus-2.webp'
+      '/img/projects/enceladus-2.webp',
+      '/img/preview/enceladus.png'
     ],
     tooltip:
       'Internship work involving modular UI systems, debugging, and real-time gameplay data integration.',
@@ -127,10 +126,12 @@ const projects = [
 export default function ProjectsPanelContent() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   const openProject = (project) => {
     setSelectedProject(project)
     setCurrentImageIndex(0)
+    setLightboxOpen(false)
   }
 
   const showPrevImage = () => {
@@ -164,12 +165,14 @@ export default function ProjectsPanelContent() {
         </div>
 
         <div className="project-detail-title-row">
-          <h3 className="project-detail-title">{selectedProject.title}</h3>
-          {selectedProject.category && (
-            <span className={`project-detail-tag project-detail-tag--${selectedProject.category.toLowerCase()}`}>
-              {selectedProject.category}
-            </span>
-          )}
+          <h3 className="project-detail-title">
+            {selectedProject.title}
+            {selectedProject.category && (
+              <span className="project-detail-category">
+                {' '}· {selectedProject.category.toLowerCase()}
+              </span>
+            )}
+          </h3>
         </div>
 
         {/* Hero image */}
@@ -177,9 +180,10 @@ export default function ProjectsPanelContent() {
           <img
             src={activeImage}
             alt={selectedProject.title}
-            className="project-hero-image"
+            className="project-hero-image project-hero-image--clickable"
             loading="lazy"
             decoding="async"
+            onClick={() => setLightboxOpen(true)}
           />
 
           <div className="project-hero-overlay" />
@@ -220,21 +224,73 @@ export default function ProjectsPanelContent() {
           </div>
         )}
 
+        {/* Lightbox */}
+        {lightboxOpen && (
+          <div className="project-lightbox" onClick={() => setLightboxOpen(false)}>
+            <button
+              type="button"
+              className="project-lightbox-close"
+              onClick={(e) => { e.stopPropagation(); setLightboxOpen(false) }}
+              aria-label="Close image"
+            >
+              <X size={16} strokeWidth={2} />
+            </button>
+
+            <img
+              src={activeImage}
+              alt={selectedProject.title}
+              className="project-lightbox-image"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {selectedProject.images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className="project-lightbox-arrow project-lightbox-arrow-left"
+                  onClick={(e) => { e.stopPropagation(); showPrevImage() }}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={16} strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  className="project-lightbox-arrow project-lightbox-arrow-right"
+                  onClick={(e) => { e.stopPropagation(); showNextImage() }}
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={16} strokeWidth={2} />
+                </button>
+
+                <div className="project-lightbox-dots" onClick={(e) => e.stopPropagation()}>
+                  {selectedProject.images.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      className={`project-image-dot ${currentImageIndex === index ? 'active' : ''}`}
+                      onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(index) }}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
         {/* Body content */}
         <div className="project-detail-body">
           {selectedProject.tools.length > 0 && (
             <div className="project-detail-section">
-              <span className="project-section-label">Stack</span>
-              <div className="project-tools-row">
-                {selectedProject.tools.map((tool) => (
-                  <span key={tool} className="project-tool-chip">{tool}</span>
-                ))}
-              </div>
+              <span className="project-section-label">stack</span>
+              <span className="project-tools-line">
+                {selectedProject.tools.join(' · ')}
+              </span>
             </div>
           )}
 
           <div className="project-detail-section">
-            <span className="project-section-label">Overview</span>
+            <span className="project-section-label">overview</span>
             <div className="project-detail-copy">
               {Array.isArray(selectedProject.description) ? (
                 selectedProject.description.map((para, index) => (
@@ -264,8 +320,9 @@ export default function ProjectsPanelContent() {
   return (
     <div className="projects-gallery-view projects-fade-in">
       <div className="projects-header-row">
-        <span className="projects-eyebrow">Selected Work</span>
-        <span className="projects-count-badge">{projects.length}</span>
+        <h3 className="projects-heading">Selected Work</h3>
+        <span className="projects-header-rule" />
+        <span className="projects-count-word">six projects</span>
       </div>
 
       <div className="projects-list">
@@ -276,28 +333,19 @@ export default function ProjectsPanelContent() {
             className="project-row"
             style={{ animationDelay: `${index * 0.05}s` }}
             onClick={() => openProject(project)}
+            aria-label={`View ${project.title}`}
           >
             <img
-              src={project.preview ?? project.images[0]}
+              src={project.images[0]}
               alt={project.title}
               className="project-row-thumb"
               loading="lazy"
               decoding="async"
             />
-
-            <div className="project-row-body">
-              <span className="project-row-title">{project.title}</span>
-              <p className="project-row-blurb">{project.tooltip}</p>
-              <span className="project-row-stack">
-                {project.tools.slice(0, 3).join(' · ')}
-              </span>
-            </div>
-
-            {project.category && (
-              <span className={`project-row-category project-row-category--${project.category.toLowerCase()}`}>
-                {project.category}
-              </span>
-            )}
+            <span className="project-row-label">
+              {project.title}
+              <em>{project.category.toLowerCase()}</em>
+            </span>
           </button>
         ))}
       </div>
