@@ -55,6 +55,13 @@
   color: rgba(255, 255, 255, 0.25);
 }
 
+.resume-summary {
+  margin: 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.42;
+}
+
 /* ── Sections ── */
 .resume-section {
   display: flex;
