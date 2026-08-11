@@ -8,16 +8,14 @@ import InfoPanel from './InfoPanel'
 import AmbientPlayer from './AmbientPlayer'
 import CustomCursor from './CustomCursor'
 import HeroTitle from './HeroTitle'
-import DesktopOverlay from './DesktopOverlay'
 import './Experience.css'
 
 const Experience = () => {
   const [introDone, setIntroDone] = useState(false)
   const [activePanel, setActivePanel] = useState(null)
-  const [screenFocus, setScreenFocus] = useState(false)
 
   return (
-    <div className={`experience ${screenFocus ? 'is-screen-focused' : ''}`}>
+    <div className="experience">
       <CustomCursor />
      <Navbar visible={introDone} onOpenPanel={setActivePanel} />
 
@@ -37,25 +35,20 @@ const Experience = () => {
         gl={{ antialias: true, powerPreference: 'high-performance' }}
       >
         <Suspense fallback={null}>
-<Scene
-  introDone={introDone}
-  screenFocus={screenFocus}
-  onScreenClick={() => setScreenFocus(true)}
-/>        </Suspense>
+          <Scene introDone={introDone} />
+        </Suspense>
       </Canvas>
 
       <div className="scene-vignette" />
 
-      {introDone && <HeroTitle dimmed={!!activePanel || screenFocus} />}
-
-      <DesktopOverlay open={screenFocus} onClose={() => setScreenFocus(false)} />
+      {introDone && <HeroTitle dimmed={!!activePanel} />}
 
       {introDone && (
   <>
     <QuickActions
       onSelect={setActivePanel}
       activePanel={activePanel}
-      visible={introDone && !screenFocus}
+      visible={introDone}
     />
     <InfoPanel
       activePanel={activePanel}
@@ -63,7 +56,7 @@ const Experience = () => {
     />
   </>
 )}
-      <AmbientPlayer visible={introDone} panelOpen={!!activePanel || screenFocus} />
+      <AmbientPlayer visible={introDone} panelOpen={!!activePanel} />
     </div>
   )
 }

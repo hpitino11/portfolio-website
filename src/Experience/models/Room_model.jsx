@@ -19,7 +19,7 @@ const easeOutBounce = (x) => {
 const easeOutCubic = (x) => 1 - Math.pow(1 - x, 3)
 
 export default function Model(props) {
-  const { introDone, onScreenClick, onScreenPivot, ...rest } = props
+  const { introDone, ...rest } = props
   const { nodes, materials } = useGLTF('/models/Room_model.glb')
 
   const chairTopRef = useRef()
@@ -27,10 +27,8 @@ export default function Model(props) {
   const linkedinGroupRef = useRef()
   const githubGroupRef = useRef()
   const gmailGroupRef = useRef()
-  const screenGroupRef = useRef()
 
   const [hoveredCard, setHoveredCard] = useState(null)
-  const [hoveredScreen, setHoveredScreen] = useState(false)
 
   const [videoTexture, setVideoTexture] = useState(null)
 
@@ -64,19 +62,16 @@ export default function Model(props) {
   const linkedinIconMaterial = useMemo(() => materials.Linkedin.clone(), [materials.Linkedin])
   const githubIconMaterial = useMemo(() => materials.Github.clone(), [materials.Github])
   const gmailIconMaterial = useMemo(() => materials.Gmail.clone(), [materials.Gmail])
-  const screenFrameMaterial = useMemo(() => materials['Material.005'].clone(), [materials])
 
   const hoverColor = useMemo(() => new THREE.Color('#ffffff'), [])
   const hoverOffColor = useMemo(() => new THREE.Color('#000000'), [])
 
-  
-
   useEffect(() => {
-    document.body.style.cursor = (hoveredCard || hoveredScreen) ? 'pointer' : 'default'
+    document.body.style.cursor = hoveredCard ? 'pointer' : 'default'
     return () => {
       document.body.style.cursor = 'default'
     }
-  }, [hoveredCard, hoveredScreen])
+  }, [hoveredCard])
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
@@ -117,15 +112,6 @@ export default function Model(props) {
   const gmailPivot = useMemo(() => {
     return getPivotFromGeometries(nodes.Curve009.geometry, nodes.Curve009_1.geometry)
   }, [nodes])
-
-  const screenPivot = useMemo(() => {
-    return getPivotFromGeometries(nodes.Circle.geometry, nodes.Circle_1.geometry)
-  }, [nodes])
-
-  // Report the screen pivot up so the scene can frame the monitor
-  useEffect(() => {
-    onScreenPivot?.(screenPivot.clone())
-  }, [screenPivot, onScreenPivot])
 
   const linkedinBasePos = useMemo(
     () => new THREE.Vector3(linkedinPivot.x, linkedinPivot.y, linkedinPivot.z),
@@ -222,14 +208,6 @@ export default function Model(props) {
     applyHoverMaterial(githubIconMaterial, hoveredCard === 'github', hoverColor, 0.1)
     applyHoverMaterial(gmailPanelMaterial, hoveredCard === 'gmail', hoverColor, 0.16)
     applyHoverMaterial(gmailIconMaterial, hoveredCard === 'gmail', hoverColor, 0.1)
-    applyHoverMaterial(screenFrameMaterial, hoveredScreen, hoverColor, 0.72)
-
-    if (screenGroupRef.current) {
-      const targetScale = hoveredScreen ? 1.015 : 1.0
-      screenGroupRef.current.scale.setScalar(
-        THREE.MathUtils.lerp(screenGroupRef.current.scale.x, targetScale, 0.1)
-      )
-    }
   })
 
   const openExternal = (url) => {
@@ -282,41 +260,14 @@ export default function Model(props) {
 
       <mesh geometry={nodes.TextureSetOne.geometry} material={materials.TextureSetOne} />
       <mesh geometry={nodes.TextureSetTwo.geometry} material={materials.TextureSetTwo} />
-      {/* Screen / Monitor - hover to preview, click to sit down at the desk */}
-      <group
-        ref={screenGroupRef}
-        position={[screenPivot.x, screenPivot.y, screenPivot.z]}
-        onPointerOver={(e) => { e.stopPropagation(); setHoveredScreen(true) }}
-        onPointerOut={() => setHoveredScreen(false)}
-        onClick={(e) => { e.stopPropagation(); onScreenClick?.() }}
-      >
-        <pointLight
-          position={[0, 0.08, 0.3]}
-          color="#eaf2ff"
-          intensity={hoveredScreen ? 1.15 : 0}
-          distance={1.5}
-          decay={2}
-        />
-        <mesh
-          geometry={nodes.Circle.geometry}
-          material={screenFrameMaterial}
-          position={[-screenPivot.x, -screenPivot.y, -screenPivot.z]}
-        />
-        <mesh
-          geometry={nodes.Circle_1.geometry}
-          position={[-screenPivot.x, -screenPivot.y, -screenPivot.z]}
-        >
-          {videoTexture
-            ? <meshBasicMaterial map={videoTexture} toneMapped={false} />
-            : <primitive object={materials.screen} attach="material" />
-          }
-        </mesh>
-        {false && (
-          <Html center distanceFactor={7} position={[0, 0.6, 0]} style={{ pointerEvents: 'none' }}>
-            <div className="object-label">Take a seat →</div>
-          </Html>
-        )}
-      </group>
+      {/* Screen / Monitor */}
+      <mesh geometry={nodes.Circle.geometry} material={materials['Material.005']} />
+      <mesh geometry={nodes.Circle_1.geometry}>
+        {videoTexture
+          ? <meshBasicMaterial map={videoTexture} toneMapped={false} />
+          : <primitive object={materials.screen} attach="material" />
+        }
+      </mesh>
 
       <mesh
         ref={chairTopRef}

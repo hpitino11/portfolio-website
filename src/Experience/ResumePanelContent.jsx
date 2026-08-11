@@ -78,7 +78,7 @@ export default function ResumePanelContent() {
 
       <p className="resume-summary">
         Full-stack developer specializing in React, TypeScript, and Node.js, with experience building and deploying
-        production websites, REST APIs, customer inquiry systems, and interactive 3D web applications. Improved page
+        production web applications, REST APIs, AI-powered features, and interactive 3D experiences. Improved page
         performance by 57% and reduced automated form submissions by 90% through frontend optimization and backend validation.
       </p>
 
@@ -102,7 +102,7 @@ export default function ResumePanelContent() {
         <div className="resume-entry">
           <div className="resume-entry-header">
             <span className="resume-entry-title">Freelance Full-Stack Developer</span>
-            <span className="resume-entry-date">Feb 2026 – Present</span>
+            <span className="resume-entry-date">Feb 2026 – Jun 2026</span>
           </div>
           <div className="resume-entry-sub">
             <span>Apex Mitigation LLC</span>
@@ -150,15 +150,15 @@ export default function ResumePanelContent() {
 
         <div className="resume-entry">
           <div className="resume-entry-header">
-            <span className="resume-entry-title">Mewcha | Boba Cafe Ordering App</span>
-            <span className="resume-entry-date">Jun 2026</span>
+            <span className="resume-entry-title">MyAnimeRec | AI-Powered Anime Recommendation Platform</span>
+            <span className="resume-entry-date">Jul 2026</span>
           </div>
           <div className="resume-entry-sub">
-            <span className="resume-entry-tech">React, TypeScript, Node.js, Express, PostgreSQL</span>
+            <span className="resume-entry-tech">React, TypeScript, Node.js, Express, PostgreSQL, Anthropic API</span>
           </div>
           <ul className="resume-bullets">
-            <li>Shipped a complete full-stack ordering platform with separate storefront and admin dashboards. Implemented JWT authentication with role-based middleware to enforce access control across both interfaces.</li>
-            <li>Designed a normalized PostgreSQL schema with Knex migrations supporting product customization, shopping cart state, and order history, plus a RESTful Node.js/Express API with protected admin routes.</li>
+            <li>Engineered a full-stack app that generates personalized recommendations by combining a user's saved titles and ratings from PostgreSQL with free-text preferences, prompting the Claude API for structured JSON output that is validated, parsed, and persisted with full recommendation history.</li>
+            <li>Integrated the AniList API for search and discovery and secured the backend with JWT authentication, bcrypt password hashing, and both per-request and daily rate limiting to protect the AI endpoint from abuse.</li>
           </ul>
         </div>
 
@@ -186,15 +186,19 @@ export default function ResumePanelContent() {
           </div>
           <div className="resume-skill-row">
             <span className="resume-skill-label">Frontend</span>
-            <span className="resume-skill-value">React, Three.js, TypeScript, CSS Modules</span>
+            <span className="resume-skill-value">React, Three.js, CSS Modules</span>
           </div>
           <div className="resume-skill-row">
             <span className="resume-skill-label">Backend</span>
-            <span className="resume-skill-value">Node.js, Express, REST APIs, PostgreSQL, MySQL, Knex</span>
+            <span className="resume-skill-value">Node.js, Express, Laravel, REST APIs</span>
+          </div>
+          <div className="resume-skill-row">
+            <span className="resume-skill-label">Databases</span>
+            <span className="resume-skill-value">PostgreSQL, MySQL, Knex</span>
           </div>
           <div className="resume-skill-row">
             <span className="resume-skill-label">Tools & Platforms</span>
-            <span className="resume-skill-value">Railway, Docker, DNS/SSL, Git, Postman, Figma, Blender, Unreal Engine 5</span>
+            <span className="resume-skill-value">Git, Docker, Railway, Postman, Figma, Anthropic API, DNS/SSL, Blender, Unreal Engine 5</span>
           </div>
         </div>
       </div>

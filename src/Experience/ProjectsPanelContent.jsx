@@ -47,6 +47,25 @@ export const projects = [
     comingSoon: false
   },
   {
+    id: 'myanimerec',
+    title: 'MyAnimeRec',
+    preview: '/img/projects/myanime1.webp',
+    images: [
+      '/img/projects/myanime1.webp',
+      '/img/projects/myanime2.webp',
+      '/img/projects/myanime3.webp'
+    ],
+    tooltip:
+      'AI-powered anime recommendation platform that generates personalized picks from saved titles, ratings, and free-text preferences.',
+    tools: ['React', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Anthropic API'],
+    description: [
+      'A full-stack app that generates personalized anime recommendations by combining a user\'s saved titles and ratings from PostgreSQL with free-text preferences, prompting the Claude API for structured JSON output that is validated, parsed, and persisted with full recommendation history.',
+      'Integrated the AniList API for search and discovery and secured the backend with JWT authentication, bcrypt password hashing, and both per-request and daily rate limiting to protect the AI endpoint from abuse.'
+    ],
+    category: 'Personal',
+    comingSoon: false
+  },
+  {
     id: 'mewcha',
     title: 'Mewcha',
     preview: '/img/preview/mewcha.webp',
@@ -64,24 +83,6 @@ export const projects = [
     ],
     websiteUrl: 'https://mewcha.shop',
     websiteLabel: 'Visit Live Site',
-    category: 'Personal',
-    comingSoon: false
-  },
-  {
-    id: 'carecalendar',
-    title: 'Care Calendar',
-    preview: '/img/preview/carecalendar.webp',
-    images: [
-      '/img/projects/carecalendar.webp',
-      '/img/projects/carecalendar2.webp'
-    ],
-    tooltip:
-      'Admin dashboard for managing home care visits, caregivers, and clients.',
-    tools: ['React', 'FullCalendar', 'Node.js', 'Express', 'PostgreSQL', 'Railway'],
-    description: [
-      'An admin dashboard that gives administrators a centralized view of a caregiving operation: who is working, who they are caring for, and when. It includes a live calendar, dashboard stats, and full CRUD for visits, caregivers, and clients.',
-      'The dashboard features an interactive FullCalendar with month, week, and day views, week-over-week trend badges, multi-day visit spanning, hover tooltips, and smart grouping for overlapping events. The backend is built with Node.js and Express backed by raw PostgreSQL via pg, with the full stack deployed to Railway.'
-    ],
     category: 'Personal',
     comingSoon: false
   },

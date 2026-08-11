@@ -17,10 +17,6 @@
   animation: label-appear 0.18s ease-out forwards;
 }
 
-.experience.is-screen-focused .object-label {
-  display: none;
-}
-
 @keyframes label-appear {
   from {
     opacity: 0;
